@@ -1,15 +1,32 @@
 configVersion: 1.0.0
+management:
+  docChecksum: 5fa7e0c88f526d37d5ff49917d1c5693
+  docVersion: v2023.10.0
+  speakeasyVersion: 1.109.2
+  generationVersion: 2.173.0
 generation:
   comments:
     disableComments: false
     omitDescriptionIfSummaryPresent: false
   baseServerURL: ""
-  repoURL: https://github.com/speakeasy-sdks/bar-ts.git
+  repoURL: https://github.com/speakeasy-sdks/risk-go.git
   sdkClassName: Risk-Cloud-API
   singleTagPerOp: false
   tagNamespacingDisabled: false
+features:
+  go:
+    constsAndDefaults: 0.1.1
+    core: 2.94.0
+    globalSecurity: 2.82.2
+    globalServerURLs: 2.82.0
+    methodSecurity: 2.82.1
+    nameOverrides: 2.81.1
 go:
-  version: 0.0.1
+  version: 0.1.0
   clientServerStatusCodesAsErrors: true
+  flattenGlobalSecurity: true
+  installationURL: https://github.com/speakeasy-sdks/risk-go
   maxMethodParams: 0
   packageName: github.com/speakeasy-sdks/risk-go
+  published: true
+  repoSubDirectory: .
