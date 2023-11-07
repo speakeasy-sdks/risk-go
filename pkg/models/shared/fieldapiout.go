@@ -7,32 +7,32 @@ import (
 	"fmt"
 )
 
-// FieldAPIOutFieldType - The type of the field
-type FieldAPIOutFieldType string
+// FieldType - The type of the field
+type FieldType string
 
 const (
-	FieldAPIOutFieldTypeDate            FieldAPIOutFieldType = "DATE"
-	FieldAPIOutFieldTypeUser            FieldAPIOutFieldType = "USER"
-	FieldAPIOutFieldTypeExternalUser    FieldAPIOutFieldType = "EXTERNAL_USER"
-	FieldAPIOutFieldTypeText            FieldAPIOutFieldType = "TEXT"
-	FieldAPIOutFieldTypeTextArea        FieldAPIOutFieldType = "TEXT_AREA"
-	FieldAPIOutFieldTypeNumber          FieldAPIOutFieldType = "NUMBER"
-	FieldAPIOutFieldTypeESignature      FieldAPIOutFieldType = "E_SIGNATURE"
-	FieldAPIOutFieldTypeCheckbox        FieldAPIOutFieldType = "CHECKBOX"
-	FieldAPIOutFieldTypeMultiSelect     FieldAPIOutFieldType = "MULTI_SELECT"
-	FieldAPIOutFieldTypeRadio           FieldAPIOutFieldType = "RADIO"
-	FieldAPIOutFieldTypeSelect          FieldAPIOutFieldType = "SELECT"
-	FieldAPIOutFieldTypeAttachment      FieldAPIOutFieldType = "ATTACHMENT"
-	FieldAPIOutFieldTypeCalculation     FieldAPIOutFieldType = "CALCULATION"
-	FieldAPIOutFieldTypeDateCalculation FieldAPIOutFieldType = "DATE_CALCULATION"
-	FieldAPIOutFieldTypeOther           FieldAPIOutFieldType = "OTHER"
+	FieldTypeDate            FieldType = "DATE"
+	FieldTypeUser            FieldType = "USER"
+	FieldTypeExternalUser    FieldType = "EXTERNAL_USER"
+	FieldTypeText            FieldType = "TEXT"
+	FieldTypeTextArea        FieldType = "TEXT_AREA"
+	FieldTypeNumber          FieldType = "NUMBER"
+	FieldTypeESignature      FieldType = "E_SIGNATURE"
+	FieldTypeCheckbox        FieldType = "CHECKBOX"
+	FieldTypeMultiSelect     FieldType = "MULTI_SELECT"
+	FieldTypeRadio           FieldType = "RADIO"
+	FieldTypeSelect          FieldType = "SELECT"
+	FieldTypeAttachment      FieldType = "ATTACHMENT"
+	FieldTypeCalculation     FieldType = "CALCULATION"
+	FieldTypeDateCalculation FieldType = "DATE_CALCULATION"
+	FieldTypeOther           FieldType = "OTHER"
 )
 
-func (e FieldAPIOutFieldType) ToPointer() *FieldAPIOutFieldType {
+func (e FieldType) ToPointer() *FieldType {
 	return &e
 }
 
-func (e *FieldAPIOutFieldType) UnmarshalJSON(data []byte) error {
+func (e *FieldType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -67,32 +67,32 @@ func (e *FieldAPIOutFieldType) UnmarshalJSON(data []byte) error {
 	case "DATE_CALCULATION":
 		fallthrough
 	case "OTHER":
-		*e = FieldAPIOutFieldType(v)
+		*e = FieldType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for FieldAPIOutFieldType: %v", v)
+		return fmt.Errorf("invalid value for FieldType: %v", v)
 	}
 }
 
-// FieldAPIOutValueType - The type of the field value
-type FieldAPIOutValueType string
+// ValueType - The type of the field value
+type ValueType string
 
 const (
-	FieldAPIOutValueTypeNumber      FieldAPIOutValueType = "NUMBER"
-	FieldAPIOutValueTypeCalculation FieldAPIOutValueType = "CALCULATION"
-	FieldAPIOutValueTypeAttachment  FieldAPIOutValueType = "ATTACHMENT"
-	FieldAPIOutValueTypeDate        FieldAPIOutValueType = "DATE"
-	FieldAPIOutValueTypeOption      FieldAPIOutValueType = "OPTION"
-	FieldAPIOutValueTypeUser        FieldAPIOutValueType = "USER"
-	FieldAPIOutValueTypeText        FieldAPIOutValueType = "TEXT"
-	FieldAPIOutValueTypeOther       FieldAPIOutValueType = "OTHER"
+	ValueTypeNumber      ValueType = "NUMBER"
+	ValueTypeCalculation ValueType = "CALCULATION"
+	ValueTypeAttachment  ValueType = "ATTACHMENT"
+	ValueTypeDate        ValueType = "DATE"
+	ValueTypeOption      ValueType = "OPTION"
+	ValueTypeUser        ValueType = "USER"
+	ValueTypeText        ValueType = "TEXT"
+	ValueTypeOther       ValueType = "OTHER"
 )
 
-func (e FieldAPIOutValueType) ToPointer() *FieldAPIOutValueType {
+func (e ValueType) ToPointer() *ValueType {
 	return &e
 }
 
-func (e *FieldAPIOutValueType) UnmarshalJSON(data []byte) error {
+func (e *ValueType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -113,10 +113,10 @@ func (e *FieldAPIOutValueType) UnmarshalJSON(data []byte) error {
 	case "TEXT":
 		fallthrough
 	case "OTHER":
-		*e = FieldAPIOutValueType(v)
+		*e = ValueType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for FieldAPIOutValueType: %v", v)
+		return fmt.Errorf("invalid value for ValueType: %v", v)
 	}
 }
 
@@ -143,9 +143,9 @@ type FieldAPIOut struct {
 	// The tooltip information of the field
 	Tooltip *string `json:"tooltip,omitempty"`
 	// The type of the field
-	Type *FieldAPIOutFieldType `json:"type,omitempty"`
+	Type *FieldType `json:"type,omitempty"`
 	// The type of the field value
-	ValueType *FieldAPIOutValueType `json:"valueType,omitempty"`
+	ValueType *ValueType `json:"valueType,omitempty"`
 	// The parent workflow of the step
 	Workflow *WorkflowPropertyAPIOut `json:"workflow,omitempty"`
 }
@@ -220,14 +220,14 @@ func (o *FieldAPIOut) GetTooltip() *string {
 	return o.Tooltip
 }
 
-func (o *FieldAPIOut) GetType() *FieldAPIOutFieldType {
+func (o *FieldAPIOut) GetType() *FieldType {
 	if o == nil {
 		return nil
 	}
 	return o.Type
 }
 
-func (o *FieldAPIOut) GetValueType() *FieldAPIOutValueType {
+func (o *FieldAPIOut) GetValueType() *ValueType {
 	if o == nil {
 		return nil
 	}

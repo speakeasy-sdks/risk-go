@@ -7,42 +7,42 @@ import (
 	"fmt"
 )
 
-// ApplicationAPICreateInIcon - The icon type of the application (defaults to CUBES)
-type ApplicationAPICreateInIcon string
+// Icon - The icon type of the application (defaults to CUBES)
+type Icon string
 
 const (
-	ApplicationAPICreateInIconBookmark            ApplicationAPICreateInIcon = "BOOKMARK"
-	ApplicationAPICreateInIconBolt                ApplicationAPICreateInIcon = "BOLT"
-	ApplicationAPICreateInIconBullhorn            ApplicationAPICreateInIcon = "BULLHORN"
-	ApplicationAPICreateInIconCertificate         ApplicationAPICreateInIcon = "CERTIFICATE"
-	ApplicationAPICreateInIconCheckSquareO        ApplicationAPICreateInIcon = "CHECK_SQUARE_O"
-	ApplicationAPICreateInIconCloud               ApplicationAPICreateInIcon = "CLOUD"
-	ApplicationAPICreateInIconComments            ApplicationAPICreateInIcon = "COMMENTS"
-	ApplicationAPICreateInIconCubes               ApplicationAPICreateInIcon = "CUBES"
-	ApplicationAPICreateInIconDollar              ApplicationAPICreateInIcon = "DOLLAR"
-	ApplicationAPICreateInIconExclamationTriangle ApplicationAPICreateInIcon = "EXCLAMATION_TRIANGLE"
-	ApplicationAPICreateInIconTextO               ApplicationAPICreateInIcon = "TEXT_O"
-	ApplicationAPICreateInIconFolder              ApplicationAPICreateInIcon = "FOLDER"
-	ApplicationAPICreateInIconGift                ApplicationAPICreateInIcon = "GIFT"
-	ApplicationAPICreateInIconGlobe               ApplicationAPICreateInIcon = "GLOBE"
-	ApplicationAPICreateInIconHeartbeat           ApplicationAPICreateInIcon = "HEARTBEAT"
-	ApplicationAPICreateInIconLeaf                ApplicationAPICreateInIcon = "LEAF"
-	ApplicationAPICreateInIconLegal               ApplicationAPICreateInIcon = "LEGAL"
-	ApplicationAPICreateInIconLifeRing            ApplicationAPICreateInIcon = "LIFE_RING"
-	ApplicationAPICreateInIconMedkit              ApplicationAPICreateInIcon = "MEDKIT"
-	ApplicationAPICreateInIconMoney               ApplicationAPICreateInIcon = "MONEY"
-	ApplicationAPICreateInIconPercent             ApplicationAPICreateInIcon = "PERCENT"
-	ApplicationAPICreateInIconRocket              ApplicationAPICreateInIcon = "ROCKET"
-	ApplicationAPICreateInIconSignal              ApplicationAPICreateInIcon = "SIGNAL"
-	ApplicationAPICreateInIconUniversity          ApplicationAPICreateInIcon = "UNIVERSITY"
-	ApplicationAPICreateInIconUserCircle          ApplicationAPICreateInIcon = "USER_CIRCLE"
+	IconBookmark            Icon = "BOOKMARK"
+	IconBolt                Icon = "BOLT"
+	IconBullhorn            Icon = "BULLHORN"
+	IconCertificate         Icon = "CERTIFICATE"
+	IconCheckSquareO        Icon = "CHECK_SQUARE_O"
+	IconCloud               Icon = "CLOUD"
+	IconComments            Icon = "COMMENTS"
+	IconCubes               Icon = "CUBES"
+	IconDollar              Icon = "DOLLAR"
+	IconExclamationTriangle Icon = "EXCLAMATION_TRIANGLE"
+	IconTextO               Icon = "TEXT_O"
+	IconFolder              Icon = "FOLDER"
+	IconGift                Icon = "GIFT"
+	IconGlobe               Icon = "GLOBE"
+	IconHeartbeat           Icon = "HEARTBEAT"
+	IconLeaf                Icon = "LEAF"
+	IconLegal               Icon = "LEGAL"
+	IconLifeRing            Icon = "LIFE_RING"
+	IconMedkit              Icon = "MEDKIT"
+	IconMoney               Icon = "MONEY"
+	IconPercent             Icon = "PERCENT"
+	IconRocket              Icon = "ROCKET"
+	IconSignal              Icon = "SIGNAL"
+	IconUniversity          Icon = "UNIVERSITY"
+	IconUserCircle          Icon = "USER_CIRCLE"
 )
 
-func (e ApplicationAPICreateInIcon) ToPointer() *ApplicationAPICreateInIcon {
+func (e Icon) ToPointer() *Icon {
 	return &e
 }
 
-func (e *ApplicationAPICreateInIcon) UnmarshalJSON(data []byte) error {
+func (e *Icon) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -97,60 +97,60 @@ func (e *ApplicationAPICreateInIcon) UnmarshalJSON(data []byte) error {
 	case "UNIVERSITY":
 		fallthrough
 	case "USER_CIRCLE":
-		*e = ApplicationAPICreateInIcon(v)
+		*e = Icon(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ApplicationAPICreateInIcon: %v", v)
+		return fmt.Errorf("invalid value for Icon: %v", v)
 	}
 }
 
-// ApplicationAPICreateInType - The type of Risk Cloud application (defaults to NONE)
-type ApplicationAPICreateInType string
+// Type - The type of Risk Cloud application (defaults to NONE)
+type Type string
 
 const (
-	ApplicationAPICreateInTypeAccessManagement             ApplicationAPICreateInType = "ACCESS_MANAGEMENT"
-	ApplicationAPICreateInTypeAmlKyc                       ApplicationAPICreateInType = "AML_KYC"
-	ApplicationAPICreateInTypeAssetManagement              ApplicationAPICreateInType = "ASSET_MANAGEMENT"
-	ApplicationAPICreateInTypeAuditManagement              ApplicationAPICreateInType = "AUDIT_MANAGEMENT"
-	ApplicationAPICreateInTypeBusinessContinuityPlanning   ApplicationAPICreateInType = "BUSINESS_CONTINUITY_PLANNING"
-	ApplicationAPICreateInTypeChangeManagement             ApplicationAPICreateInType = "CHANGE_MANAGEMENT"
-	ApplicationAPICreateInTypeComplaintManagement          ApplicationAPICreateInType = "COMPLAINT_MANAGEMENT"
-	ApplicationAPICreateInTypeComplianceManagement         ApplicationAPICreateInType = "COMPLIANCE_MANAGEMENT"
-	ApplicationAPICreateInTypeContractManagement           ApplicationAPICreateInType = "CONTRACT_MANAGEMENT"
-	ApplicationAPICreateInTypeControlsCompliance           ApplicationAPICreateInType = "CONTROLS_COMPLIANCE"
-	ApplicationAPICreateInTypeControlsManagement           ApplicationAPICreateInType = "CONTROLS_MANAGEMENT"
-	ApplicationAPICreateInTypeCrisisManagement             ApplicationAPICreateInType = "CRISIS_MANAGEMENT"
-	ApplicationAPICreateInTypeCustom                       ApplicationAPICreateInType = "CUSTOM"
-	ApplicationAPICreateInTypeCustomGrcUseCase             ApplicationAPICreateInType = "CUSTOM_GRC_USE_CASE"
-	ApplicationAPICreateInTypeCyberRiskManagement          ApplicationAPICreateInType = "CYBER_RISK_MANAGEMENT"
-	ApplicationAPICreateInTypeDataPrivacyManagement        ApplicationAPICreateInType = "DATA_PRIVACY_MANAGEMENT"
-	ApplicationAPICreateInTypeEmployeeCompliance           ApplicationAPICreateInType = "EMPLOYEE_COMPLIANCE"
-	ApplicationAPICreateInTypeEnterpriseRiskManagement     ApplicationAPICreateInType = "ENTERPRISE_RISK_MANAGEMENT"
-	ApplicationAPICreateInTypeEsg                          ApplicationAPICreateInType = "ESG"
-	ApplicationAPICreateInTypeIncidentManagement           ApplicationAPICreateInType = "INCIDENT_MANAGEMENT"
-	ApplicationAPICreateInTypeInternalAuditManagement      ApplicationAPICreateInType = "INTERNAL_AUDIT_MANAGEMENT"
-	ApplicationAPICreateInTypeItRiskManagement             ApplicationAPICreateInType = "IT_RISK_MANAGEMENT"
-	ApplicationAPICreateInTypeNone                         ApplicationAPICreateInType = "NONE"
-	ApplicationAPICreateInTypeOperationalResiliency        ApplicationAPICreateInType = "OPERATIONAL_RESILIENCY"
-	ApplicationAPICreateInTypeOther                        ApplicationAPICreateInType = "OTHER"
-	ApplicationAPICreateInTypePolicyAndProcedureManagement ApplicationAPICreateInType = "POLICY_AND_PROCEDURE_MANAGEMENT"
-	ApplicationAPICreateInTypePolicyManagement             ApplicationAPICreateInType = "POLICY_MANAGEMENT"
-	ApplicationAPICreateInTypePrivacyManagement            ApplicationAPICreateInType = "PRIVACY_MANAGEMENT"
-	ApplicationAPICreateInTypeQuantify                     ApplicationAPICreateInType = "QUANTIFY"
-	ApplicationAPICreateInTypeRegulatoryCompliance         ApplicationAPICreateInType = "REGULATORY_COMPLIANCE"
-	ApplicationAPICreateInTypeRepository                   ApplicationAPICreateInType = "REPOSITORY"
-	ApplicationAPICreateInTypeRiskQuantification           ApplicationAPICreateInType = "RISK_QUANTIFICATION"
-	ApplicationAPICreateInTypeSoxTesting                   ApplicationAPICreateInType = "SOX_TESTING"
-	ApplicationAPICreateInTypeStandardsRegulations         ApplicationAPICreateInType = "STANDARDS_REGULATIONS"
-	ApplicationAPICreateInTypeSurvey                       ApplicationAPICreateInType = "SURVEY"
-	ApplicationAPICreateInTypeThirdPartyRiskManagement     ApplicationAPICreateInType = "THIRD_PARTY_RISK_MANAGEMENT"
+	TypeAccessManagement             Type = "ACCESS_MANAGEMENT"
+	TypeAmlKyc                       Type = "AML_KYC"
+	TypeAssetManagement              Type = "ASSET_MANAGEMENT"
+	TypeAuditManagement              Type = "AUDIT_MANAGEMENT"
+	TypeBusinessContinuityPlanning   Type = "BUSINESS_CONTINUITY_PLANNING"
+	TypeChangeManagement             Type = "CHANGE_MANAGEMENT"
+	TypeComplaintManagement          Type = "COMPLAINT_MANAGEMENT"
+	TypeComplianceManagement         Type = "COMPLIANCE_MANAGEMENT"
+	TypeContractManagement           Type = "CONTRACT_MANAGEMENT"
+	TypeControlsCompliance           Type = "CONTROLS_COMPLIANCE"
+	TypeControlsManagement           Type = "CONTROLS_MANAGEMENT"
+	TypeCrisisManagement             Type = "CRISIS_MANAGEMENT"
+	TypeCustom                       Type = "CUSTOM"
+	TypeCustomGrcUseCase             Type = "CUSTOM_GRC_USE_CASE"
+	TypeCyberRiskManagement          Type = "CYBER_RISK_MANAGEMENT"
+	TypeDataPrivacyManagement        Type = "DATA_PRIVACY_MANAGEMENT"
+	TypeEmployeeCompliance           Type = "EMPLOYEE_COMPLIANCE"
+	TypeEnterpriseRiskManagement     Type = "ENTERPRISE_RISK_MANAGEMENT"
+	TypeEsg                          Type = "ESG"
+	TypeIncidentManagement           Type = "INCIDENT_MANAGEMENT"
+	TypeInternalAuditManagement      Type = "INTERNAL_AUDIT_MANAGEMENT"
+	TypeItRiskManagement             Type = "IT_RISK_MANAGEMENT"
+	TypeNone                         Type = "NONE"
+	TypeOperationalResiliency        Type = "OPERATIONAL_RESILIENCY"
+	TypeOther                        Type = "OTHER"
+	TypePolicyAndProcedureManagement Type = "POLICY_AND_PROCEDURE_MANAGEMENT"
+	TypePolicyManagement             Type = "POLICY_MANAGEMENT"
+	TypePrivacyManagement            Type = "PRIVACY_MANAGEMENT"
+	TypeQuantify                     Type = "QUANTIFY"
+	TypeRegulatoryCompliance         Type = "REGULATORY_COMPLIANCE"
+	TypeRepository                   Type = "REPOSITORY"
+	TypeRiskQuantification           Type = "RISK_QUANTIFICATION"
+	TypeSoxTesting                   Type = "SOX_TESTING"
+	TypeStandardsRegulations         Type = "STANDARDS_REGULATIONS"
+	TypeSurvey                       Type = "SURVEY"
+	TypeThirdPartyRiskManagement     Type = "THIRD_PARTY_RISK_MANAGEMENT"
 )
 
-func (e ApplicationAPICreateInType) ToPointer() *ApplicationAPICreateInType {
+func (e Type) ToPointer() *Type {
 	return &e
 }
 
-func (e *ApplicationAPICreateInType) UnmarshalJSON(data []byte) error {
+func (e *Type) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -227,10 +227,10 @@ func (e *ApplicationAPICreateInType) UnmarshalJSON(data []byte) error {
 	case "SURVEY":
 		fallthrough
 	case "THIRD_PARTY_RISK_MANAGEMENT":
-		*e = ApplicationAPICreateInType(v)
+		*e = Type(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ApplicationAPICreateInType: %v", v)
+		return fmt.Errorf("invalid value for Type: %v", v)
 	}
 }
 
@@ -238,11 +238,11 @@ type ApplicationAPICreateIn struct {
 	// The hex representation of the icon color of the application (defaults to #00a3de)
 	Color *string `json:"color,omitempty"`
 	// The icon type of the application (defaults to CUBES)
-	Icon *ApplicationAPICreateInIcon `json:"icon,omitempty"`
+	Icon *Icon `json:"icon,omitempty"`
 	// The name of the application
 	Name string `json:"name"`
 	// The type of Risk Cloud application (defaults to NONE)
-	Type *ApplicationAPICreateInType `json:"type,omitempty"`
+	Type *Type `json:"type,omitempty"`
 }
 
 func (o *ApplicationAPICreateIn) GetColor() *string {
@@ -252,7 +252,7 @@ func (o *ApplicationAPICreateIn) GetColor() *string {
 	return o.Color
 }
 
-func (o *ApplicationAPICreateIn) GetIcon() *ApplicationAPICreateInIcon {
+func (o *ApplicationAPICreateIn) GetIcon() *Icon {
 	if o == nil {
 		return nil
 	}
@@ -266,7 +266,7 @@ func (o *ApplicationAPICreateIn) GetName() string {
 	return o.Name
 }
 
-func (o *ApplicationAPICreateIn) GetType() *ApplicationAPICreateInType {
+func (o *ApplicationAPICreateIn) GetType() *Type {
 	if o == nil {
 		return nil
 	}

@@ -1,5 +1,5 @@
 # Step
-(*Step*)
+(*.Step*)
 
 ## Overview
 
@@ -45,7 +45,7 @@ func main() {
     ctx := context.Background()
     res, err := s.Step.Create(ctx, operations.CreateStepRequest{
         StepAPICreateIn: shared.StepAPICreateIn{
-            AssignableUserType: shared.StepAPICreateInAssignableUserTypeAppUsers.ToPointer(),
+            AssignableUserType: shared.AssignableUserTypeAppUsers.ToPointer(),
             EnableComments: riskgo.Bool(false),
             ExternalUserMfaRequired: riskgo.Bool(false),
             Name: "Identify Risk",

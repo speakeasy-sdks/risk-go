@@ -7,21 +7,21 @@ import (
 	"fmt"
 )
 
-// WorkflowMapAPICreateInRelationship - The type of the relationship between workflows
-type WorkflowMapAPICreateInRelationship string
+// Relationship - The type of the relationship between workflows
+type Relationship string
 
 const (
-	WorkflowMapAPICreateInRelationshipOneToOne   WorkflowMapAPICreateInRelationship = "OneToOne"
-	WorkflowMapAPICreateInRelationshipOneToMany  WorkflowMapAPICreateInRelationship = "OneToMany"
-	WorkflowMapAPICreateInRelationshipManyToOne  WorkflowMapAPICreateInRelationship = "ManyToOne"
-	WorkflowMapAPICreateInRelationshipManyToMany WorkflowMapAPICreateInRelationship = "ManyToMany"
+	RelationshipOneToOne   Relationship = "OneToOne"
+	RelationshipOneToMany  Relationship = "OneToMany"
+	RelationshipManyToOne  Relationship = "ManyToOne"
+	RelationshipManyToMany Relationship = "ManyToMany"
 )
 
-func (e WorkflowMapAPICreateInRelationship) ToPointer() *WorkflowMapAPICreateInRelationship {
+func (e Relationship) ToPointer() *Relationship {
 	return &e
 }
 
-func (e *WorkflowMapAPICreateInRelationship) UnmarshalJSON(data []byte) error {
+func (e *Relationship) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -34,10 +34,10 @@ func (e *WorkflowMapAPICreateInRelationship) UnmarshalJSON(data []byte) error {
 	case "ManyToOne":
 		fallthrough
 	case "ManyToMany":
-		*e = WorkflowMapAPICreateInRelationship(v)
+		*e = Relationship(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for WorkflowMapAPICreateInRelationship: %v", v)
+		return fmt.Errorf("invalid value for Relationship: %v", v)
 	}
 }
 
@@ -46,7 +46,7 @@ type WorkflowMapAPICreateIn struct {
 	// The unique ID of the source workflow of the workflow map relationship
 	From string `json:"from"`
 	// The type of the relationship between workflows
-	Relationship WorkflowMapAPICreateInRelationship `json:"relationship"`
+	Relationship Relationship `json:"relationship"`
 	// The unique ID of the destination workflow of the workflow map relationship
 	To string `json:"to"`
 }
@@ -58,9 +58,9 @@ func (o *WorkflowMapAPICreateIn) GetFrom() string {
 	return o.From
 }
 
-func (o *WorkflowMapAPICreateIn) GetRelationship() WorkflowMapAPICreateInRelationship {
+func (o *WorkflowMapAPICreateIn) GetRelationship() Relationship {
 	if o == nil {
-		return WorkflowMapAPICreateInRelationship("")
+		return Relationship("")
 	}
 	return o.Relationship
 }

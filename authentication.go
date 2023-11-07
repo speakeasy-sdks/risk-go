@@ -15,13 +15,13 @@ import (
 	"strings"
 )
 
-// authentication - Getting Started: How to create an [API Access Token](https://www.logicgate.com/developer/risk-cloud-api-authentication/) to begin integrating with the Risk Cloud API
-type authentication struct {
+// Authentication - Getting Started: How to create an [API Access Token](https://www.logicgate.com/developer/risk-cloud-api-authentication/) to begin integrating with the Risk Cloud API
+type Authentication struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newAuthentication(sdkConfig sdkConfiguration) *authentication {
-	return &authentication{
+func newAuthentication(sdkConfig sdkConfiguration) *Authentication {
+	return &Authentication{
 		sdkConfiguration: sdkConfig,
 	}
 }
@@ -30,7 +30,7 @@ func newAuthentication(sdkConfig sdkConfiguration) *authentication {
 // **Permissions:** Authenticated User
 //
 // Generates a new, expiring access token from the provided Client and Secret keys.
-func (s *authentication) GetAPIToken(ctx context.Context, request operations.GetAPITokenRequest, security operations.GetAPITokenSecurity) (*operations.GetAPITokenResponse, error) {
+func (s *Authentication) GetAPIToken(ctx context.Context, request operations.GetAPITokenRequest, security operations.GetAPITokenSecurity) (*operations.GetAPITokenResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v1/account/token"
 

@@ -15,13 +15,13 @@ import (
 	"strings"
 )
 
-// record - A [Record](https://help.logicgate.com/hc/en-us/articles/4402683104020-Complete-a-Record) is a form that can capture information, store cataloged data, and link to other Records as it moves through each Step of a Workflow
-type record struct {
+// Record - A [Record](https://help.logicgate.com/hc/en-us/articles/4402683104020-Complete-a-Record) is a form that can capture information, store cataloged data, and link to other Records as it moves through each Step of a Workflow
+type Record struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newRecord(sdkConfig sdkConfiguration) *record {
-	return &record{
+func newRecord(sdkConfig sdkConfiguration) *Record {
+	return &Record{
 		sdkConfiguration: sdkConfig,
 	}
 }
@@ -30,7 +30,7 @@ func newRecord(sdkConfig sdkConfiguration) *record {
 // **Permissions:** Authenticated User
 //
 // Retrieve a page of all records that the current user has [Read or Write access](https://help.logicgate.com/hc/en-us/articles/4402683227156-Permission-Sets-) to.
-func (s *record) ReadAll(ctx context.Context, request operations.ReadAllRecordsRequest) (*operations.ReadAllRecordsResponse, error) {
+func (s *Record) ReadAll(ctx context.Context, request operations.ReadAllRecordsRequest) (*operations.ReadAllRecordsResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v2/records"
 

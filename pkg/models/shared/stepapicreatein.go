@@ -7,20 +7,20 @@ import (
 	"fmt"
 )
 
-// StepAPICreateInAssignableUserType - Indicates which users are allowed to be assigned this step on a record (defaults to APP_USERS)
-type StepAPICreateInAssignableUserType string
+// AssignableUserType - Indicates which users are allowed to be assigned this step on a record (defaults to APP_USERS)
+type AssignableUserType string
 
 const (
-	StepAPICreateInAssignableUserTypeAppAndExternalUsers StepAPICreateInAssignableUserType = "APP_AND_EXTERNAL_USERS"
-	StepAPICreateInAssignableUserTypeAppUsers            StepAPICreateInAssignableUserType = "APP_USERS"
-	StepAPICreateInAssignableUserTypeExternalUsers       StepAPICreateInAssignableUserType = "EXTERNAL_USERS"
+	AssignableUserTypeAppAndExternalUsers AssignableUserType = "APP_AND_EXTERNAL_USERS"
+	AssignableUserTypeAppUsers            AssignableUserType = "APP_USERS"
+	AssignableUserTypeExternalUsers       AssignableUserType = "EXTERNAL_USERS"
 )
 
-func (e StepAPICreateInAssignableUserType) ToPointer() *StepAPICreateInAssignableUserType {
+func (e AssignableUserType) ToPointer() *AssignableUserType {
 	return &e
 }
 
-func (e *StepAPICreateInAssignableUserType) UnmarshalJSON(data []byte) error {
+func (e *AssignableUserType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -31,17 +31,17 @@ func (e *StepAPICreateInAssignableUserType) UnmarshalJSON(data []byte) error {
 	case "APP_USERS":
 		fallthrough
 	case "EXTERNAL_USERS":
-		*e = StepAPICreateInAssignableUserType(v)
+		*e = AssignableUserType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for StepAPICreateInAssignableUserType: %v", v)
+		return fmt.Errorf("invalid value for AssignableUserType: %v", v)
 	}
 }
 
 // StepAPICreateIn - Step (Create)
 type StepAPICreateIn struct {
 	// Indicates which users are allowed to be assigned this step on a record (defaults to APP_USERS)
-	AssignableUserType *StepAPICreateInAssignableUserType `json:"assignableUserType,omitempty"`
+	AssignableUserType *AssignableUserType `json:"assignableUserType,omitempty"`
 	// Whether comments are displayed on a step (defaults to false)
 	EnableComments *bool `json:"enableComments,omitempty"`
 	// Whether MFA is required for external users to access this step. (defaults to false)
@@ -56,7 +56,7 @@ type StepAPICreateIn struct {
 	Ypos *int `json:"ypos,omitempty"`
 }
 
-func (o *StepAPICreateIn) GetAssignableUserType() *StepAPICreateInAssignableUserType {
+func (o *StepAPICreateIn) GetAssignableUserType() *AssignableUserType {
 	if o == nil {
 		return nil
 	}

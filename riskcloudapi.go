@@ -70,20 +70,20 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 //
 // https://www.logicgate.com/developer/ - Developer Portal
 type RiskCloudAPI struct {
-	// An [Application](https://help.logicgate.com/hc/en-us/articles/4402674055572-Create-a-new-Application) is a collection of Workflows, Steps, and logic that collectively solve a business use case
-	Application *application
 	// Getting Started: How to create an [API Access Token](https://www.logicgate.com/developer/risk-cloud-api-authentication/) to begin integrating with the Risk Cloud API
-	Authentication *authentication
+	Authentication *Authentication
+	// An [Application](https://help.logicgate.com/hc/en-us/articles/4402674055572-Create-a-new-Application) is a collection of Workflows, Steps, and logic that collectively solve a business use case
+	Application *Application
 	// A [Field](https://help.logicgate.com/hc/en-us/articles/4402674064020-Create-Fields) is used to capture information from and display information to users in a Workflow
-	Field *field
+	Field *Field
 	// A [Record](https://help.logicgate.com/hc/en-us/articles/4402683104020-Complete-a-Record) is a form that can capture information, store cataloged data, and link to other Records as it moves through each Step of a Workflow
-	Record *record
+	Record *Record
 	// A [Step](https://help.logicgate.com/hc/en-us/articles/4402674059668-Create-a-Step) lives in a Workflow and is configured with a set of Sections, Subsections and Fields to create a form
-	Step *step
-	// A [Workflow](https://help.logicgate.com/hc/en-us/articles/4402683108756-Create-a-new-Workflow) is a combination of Steps, Paths, Fields, and routing logic that combine to form a system in an Application
-	Workflow *workflow
+	Step *Step
 	// A [Workflow Map](https://help.logicgate.com/hc/en-us/articles/4402683117588) represents a relationship between two Workflows
-	WorkflowMap *workflowMap
+	WorkflowMap *WorkflowMap
+	// A [Workflow](https://help.logicgate.com/hc/en-us/articles/4402683108756-Create-a-new-Workflow) is a combination of Steps, Paths, Fields, and routing logic that combine to form a system in an Application
+	Workflow *Workflow
 
 	sdkConfiguration sdkConfiguration
 }
@@ -161,9 +161,9 @@ func New(opts ...SDKOption) *RiskCloudAPI {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "v2023.10.0",
-			SDKVersion:        "0.1.0",
-			GenVersion:        "2.173.0",
-			UserAgent:         "speakeasy-sdk/go 0.1.0 2.173.0 v2023.10.0 github.com/speakeasy-sdks/risk-go",
+			SDKVersion:        "0.2.0",
+			GenVersion:        "2.181.1",
+			UserAgent:         "speakeasy-sdk/go 0.2.0 2.181.1 v2023.10.0 github.com/speakeasy-sdks/risk-go",
 		},
 	}
 	for _, opt := range opts {
@@ -182,9 +182,9 @@ func New(opts ...SDKOption) *RiskCloudAPI {
 		}
 	}
 
-	sdk.Application = newApplication(sdk.sdkConfiguration)
-
 	sdk.Authentication = newAuthentication(sdk.sdkConfiguration)
+
+	sdk.Application = newApplication(sdk.sdkConfiguration)
 
 	sdk.Field = newField(sdk.sdkConfiguration)
 
@@ -192,9 +192,9 @@ func New(opts ...SDKOption) *RiskCloudAPI {
 
 	sdk.Step = newStep(sdk.sdkConfiguration)
 
-	sdk.Workflow = newWorkflow(sdk.sdkConfiguration)
-
 	sdk.WorkflowMap = newWorkflowMap(sdk.sdkConfiguration)
+
+	sdk.Workflow = newWorkflow(sdk.sdkConfiguration)
 
 	return sdk
 }

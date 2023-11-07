@@ -7,22 +7,22 @@ import (
 	"fmt"
 )
 
-// RecordAPIOutStatus - The status of the record
-type RecordAPIOutStatus string
+// Status - The status of the record
+type Status string
 
 const (
-	RecordAPIOutStatusInactive    RecordAPIOutStatus = "INACTIVE"
-	RecordAPIOutStatusNotAssigned RecordAPIOutStatus = "NOT_ASSIGNED"
-	RecordAPIOutStatusAssigned    RecordAPIOutStatus = "ASSIGNED"
-	RecordAPIOutStatusInProgress  RecordAPIOutStatus = "IN_PROGRESS"
-	RecordAPIOutStatusComplete    RecordAPIOutStatus = "COMPLETE"
+	StatusInactive    Status = "INACTIVE"
+	StatusNotAssigned Status = "NOT_ASSIGNED"
+	StatusAssigned    Status = "ASSIGNED"
+	StatusInProgress  Status = "IN_PROGRESS"
+	StatusComplete    Status = "COMPLETE"
 )
 
-func (e RecordAPIOutStatus) ToPointer() *RecordAPIOutStatus {
+func (e Status) ToPointer() *Status {
 	return &e
 }
 
-func (e *RecordAPIOutStatus) UnmarshalJSON(data []byte) error {
+func (e *Status) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -37,10 +37,10 @@ func (e *RecordAPIOutStatus) UnmarshalJSON(data []byte) error {
 	case "IN_PROGRESS":
 		fallthrough
 	case "COMPLETE":
-		*e = RecordAPIOutStatus(v)
+		*e = Status(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for RecordAPIOutStatus: %v", v)
+		return fmt.Errorf("invalid value for Status: %v", v)
 	}
 }
 
@@ -71,7 +71,7 @@ type RecordAPIOut struct {
 	// The sequence number of the record
 	SequenceNumber *int64 `json:"sequenceNumber,omitempty"`
 	// The status of the record
-	Status *RecordAPIOutStatus `json:"status,omitempty"`
+	Status *Status `json:"status,omitempty"`
 	// The parent workflow of the step
 	Workflow *WorkflowPropertyAPIOut `json:"workflow,omitempty"`
 }
@@ -160,7 +160,7 @@ func (o *RecordAPIOut) GetSequenceNumber() *int64 {
 	return o.SequenceNumber
 }
 
-func (o *RecordAPIOut) GetStatus() *RecordAPIOutStatus {
+func (o *RecordAPIOut) GetStatus() *Status {
 	if o == nil {
 		return nil
 	}

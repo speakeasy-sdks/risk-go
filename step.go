@@ -15,13 +15,13 @@ import (
 	"strings"
 )
 
-// step - A [Step](https://help.logicgate.com/hc/en-us/articles/4402674059668-Create-a-Step) lives in a Workflow and is configured with a set of Sections, Subsections and Fields to create a form
-type step struct {
+// Step - A [Step](https://help.logicgate.com/hc/en-us/articles/4402674059668-Create-a-Step) lives in a Workflow and is configured with a set of Sections, Subsections and Fields to create a form
+type Step struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newStep(sdkConfig sdkConfiguration) *step {
-	return &step{
+func newStep(sdkConfig sdkConfiguration) *Step {
+	return &Step{
 		sdkConfiguration: sdkConfig,
 	}
 }
@@ -30,7 +30,7 @@ func newStep(sdkConfig sdkConfiguration) *step {
 // **Permissions:** [Build Access to parent application](https://help.logicgate.com/hc/en-us/articles/4402683190164-Control-Build-Access-for-Applications)
 //
 // Create a step from a JSON request body.
-func (s *step) Create(ctx context.Context, request operations.CreateStepRequest) (*operations.CreateStepResponse, error) {
+func (s *Step) Create(ctx context.Context, request operations.CreateStepRequest) (*operations.CreateStepResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v2/steps"
 
@@ -103,7 +103,7 @@ func (s *step) Create(ctx context.Context, request operations.CreateStepRequest)
 // **Permissions:** [Build Access to parent application](https://help.logicgate.com/hc/en-us/articles/4402683190164-Control-Build-Access-for-Applications)
 //
 // Delete a step specified by the ID in the URL path.
-func (s *step) Delete(ctx context.Context, request operations.DeleteStepRequest) (*operations.DeleteStepResponse, error) {
+func (s *Step) Delete(ctx context.Context, request operations.DeleteStepRequest) (*operations.DeleteStepResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/v2/steps/{id}", request, nil)
 	if err != nil {
@@ -169,7 +169,7 @@ func (s *step) Delete(ctx context.Context, request operations.DeleteStepRequest)
 // **Permissions:** [Build Access to parent application](https://help.logicgate.com/hc/en-us/articles/4402683190164-Control-Build-Access-for-Applications)
 //
 // Retrieve a step specified by the ID in the URL path.
-func (s *step) Read(ctx context.Context, request operations.ReadStepRequest) (*operations.ReadStepResponse, error) {
+func (s *Step) Read(ctx context.Context, request operations.ReadStepRequest) (*operations.ReadStepResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/v2/steps/{id}", request, nil)
 	if err != nil {
@@ -235,7 +235,7 @@ func (s *step) Read(ctx context.Context, request operations.ReadStepRequest) (*o
 // **Permissions:** [Build Access](https://help.logicgate.com/hc/en-us/articles/4402683190164-Control-Build-Access-for-Applications)
 //
 // Retrieve a page of all steps that the current user has [Build Access to parent application](https://help.logicgate.com/hc/en-us/articles/4402683190164-Control-Build-Access-for-Applications) to.
-func (s *step) ReadAll(ctx context.Context, request operations.ReadAllStepsRequest) (*operations.ReadAllStepsResponse, error) {
+func (s *Step) ReadAll(ctx context.Context, request operations.ReadAllStepsRequest) (*operations.ReadAllStepsResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v2/steps"
 
@@ -302,7 +302,7 @@ func (s *step) ReadAll(ctx context.Context, request operations.ReadAllStepsReque
 // **Permissions:** [Build Access to parent application](https://help.logicgate.com/hc/en-us/articles/4402683190164-Control-Build-Access-for-Applications)
 //
 // Update a step specified by the ID in the URL path from a JSON request body. Only present properties with non-empty values are updated.
-func (s *step) Update(ctx context.Context, request operations.UpdateRequest) (*operations.UpdateResponse, error) {
+func (s *Step) Update(ctx context.Context, request operations.UpdateRequest) (*operations.UpdateResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/v2/steps/{id}", request, nil)
 	if err != nil {

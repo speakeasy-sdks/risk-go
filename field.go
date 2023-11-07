@@ -15,13 +15,13 @@ import (
 	"strings"
 )
 
-// field - A [Field](https://help.logicgate.com/hc/en-us/articles/4402674064020-Create-Fields) is used to capture information from and display information to users in a Workflow
-type field struct {
+// Field - A [Field](https://help.logicgate.com/hc/en-us/articles/4402674064020-Create-Fields) is used to capture information from and display information to users in a Workflow
+type Field struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newField(sdkConfig sdkConfiguration) *field {
-	return &field{
+func newField(sdkConfig sdkConfiguration) *Field {
+	return &Field{
 		sdkConfiguration: sdkConfig,
 	}
 }
@@ -30,7 +30,7 @@ func newField(sdkConfig sdkConfiguration) *field {
 // **Permissions:** [Build Access](https://help.logicgate.com/hc/en-us/articles/4402683190164-Control-Build-Access-for-Applications)
 //
 // Retrieve a page of all fields whose parent application the current user has [Build Access](https://help.logicgate.com/hc/en-us/articles/4402683190164-Control-Build-Access-for-Applications) to.
-func (s *field) ReadAll(ctx context.Context, request operations.ReadAllFieldsRequest) (*operations.ReadAllFieldsResponse, error) {
+func (s *Field) ReadAll(ctx context.Context, request operations.ReadAllFieldsRequest) (*operations.ReadAllFieldsResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v2/fields"
 

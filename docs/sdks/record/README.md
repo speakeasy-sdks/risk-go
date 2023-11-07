@@ -1,5 +1,5 @@
 # Record
-(*Record*)
+(*.Record*)
 
 ## Overview
 

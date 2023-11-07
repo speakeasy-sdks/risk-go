@@ -15,13 +15,13 @@ import (
 	"strings"
 )
 
-// workflow - A [Workflow](https://help.logicgate.com/hc/en-us/articles/4402683108756-Create-a-new-Workflow) is a combination of Steps, Paths, Fields, and routing logic that combine to form a system in an Application
-type workflow struct {
+// Workflow - A [Workflow](https://help.logicgate.com/hc/en-us/articles/4402683108756-Create-a-new-Workflow) is a combination of Steps, Paths, Fields, and routing logic that combine to form a system in an Application
+type Workflow struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newWorkflow(sdkConfig sdkConfiguration) *workflow {
-	return &workflow{
+func newWorkflow(sdkConfig sdkConfiguration) *Workflow {
+	return &Workflow{
 		sdkConfiguration: sdkConfig,
 	}
 }
@@ -30,7 +30,7 @@ func newWorkflow(sdkConfig sdkConfiguration) *workflow {
 // **Permissions:** [Build Access to parent application](https://help.logicgate.com/hc/en-us/articles/4402683190164-Control-Build-Access-for-Applications)
 //
 // Create a workflow from a JSON request body. The workflow will contain a Default Origin step and a Default End step.
-func (s *workflow) Create(ctx context.Context, request operations.CreateWorkflowRequest) (*operations.CreateWorkflowResponse, error) {
+func (s *Workflow) Create(ctx context.Context, request operations.CreateWorkflowRequest) (*operations.CreateWorkflowResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v2/workflows"
 
@@ -103,7 +103,7 @@ func (s *workflow) Create(ctx context.Context, request operations.CreateWorkflow
 // **Permissions:** [Build Access to parent application](https://help.logicgate.com/hc/en-us/articles/4402683190164-Control-Build-Access-for-Applications)
 //
 // Delete a workflow specified by the ID in the URL path.
-func (s *workflow) Delete(ctx context.Context, request operations.DeleteWorkflowRequest) (*operations.DeleteWorkflowResponse, error) {
+func (s *Workflow) Delete(ctx context.Context, request operations.DeleteWorkflowRequest) (*operations.DeleteWorkflowResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/v2/workflows/{id}", request, nil)
 	if err != nil {
@@ -169,7 +169,7 @@ func (s *workflow) Delete(ctx context.Context, request operations.DeleteWorkflow
 // **Permissions:** [Build Access to parent application](https://help.logicgate.com/hc/en-us/articles/4402683190164-Control-Build-Access-for-Applications)
 //
 // Retrieve a workflow specified by the ID in the URL path.
-func (s *workflow) Read(ctx context.Context, request operations.ReadWorkflowRequest) (*operations.ReadWorkflowResponse, error) {
+func (s *Workflow) Read(ctx context.Context, request operations.ReadWorkflowRequest) (*operations.ReadWorkflowResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/v2/workflows/{id}", request, nil)
 	if err != nil {
@@ -235,7 +235,7 @@ func (s *workflow) Read(ctx context.Context, request operations.ReadWorkflowRequ
 // **Permissions:** [Build Access](https://help.logicgate.com/hc/en-us/articles/4402683190164-Control-Build-Access-for-Applications)
 //
 // Retrieve a page of all workflows that the current user has [Build Access to parent application](https://help.logicgate.com/hc/en-us/articles/4402683190164-Control-Build-Access-for-Applications) to.
-func (s *workflow) ReadAll(ctx context.Context, request operations.ReadAllWorkflowsRequest) (*operations.ReadAllWorkflowsResponse, error) {
+func (s *Workflow) ReadAll(ctx context.Context, request operations.ReadAllWorkflowsRequest) (*operations.ReadAllWorkflowsResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v2/workflows"
 
@@ -302,7 +302,7 @@ func (s *workflow) ReadAll(ctx context.Context, request operations.ReadAllWorkfl
 // **Permissions:** [Build Access to parent application](https://help.logicgate.com/hc/en-us/articles/4402683190164-Control-Build-Access-for-Applications)
 //
 // Update a workflow specified by the ID in the URL path from a JSON request body. Only present properties with non-empty values are updated.
-func (s *workflow) Update(ctx context.Context, request operations.UpdateWorkflowRequest) (*operations.UpdateWorkflowResponse, error) {
+func (s *Workflow) Update(ctx context.Context, request operations.UpdateWorkflowRequest) (*operations.UpdateWorkflowResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/v2/workflows/{id}", request, nil)
 	if err != nil {

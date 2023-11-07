@@ -15,13 +15,13 @@ import (
 	"strings"
 )
 
-// workflowMap - A [Workflow Map](https://help.logicgate.com/hc/en-us/articles/4402683117588) represents a relationship between two Workflows
-type workflowMap struct {
+// WorkflowMap - A [Workflow Map](https://help.logicgate.com/hc/en-us/articles/4402683117588) represents a relationship between two Workflows
+type WorkflowMap struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newWorkflowMap(sdkConfig sdkConfiguration) *workflowMap {
-	return &workflowMap{
+func newWorkflowMap(sdkConfig sdkConfiguration) *WorkflowMap {
+	return &WorkflowMap{
 		sdkConfiguration: sdkConfig,
 	}
 }
@@ -30,7 +30,7 @@ func newWorkflowMap(sdkConfig sdkConfiguration) *workflowMap {
 // **Permissions:** [Build Access to parent applications](https://help.logicgate.com/hc/en-us/articles/4402683190164-Control-Build-Access-for-Applications)
 //
 // Create a workflow map from a JSON request body.
-func (s *workflowMap) Create(ctx context.Context, request operations.CreateWorkflowMapRequest) (*operations.CreateWorkflowMapResponse, error) {
+func (s *WorkflowMap) Create(ctx context.Context, request operations.CreateWorkflowMapRequest) (*operations.CreateWorkflowMapResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v2/workflow-maps"
 
@@ -103,7 +103,7 @@ func (s *workflowMap) Create(ctx context.Context, request operations.CreateWorkf
 // **Permissions:** [Build Access to a parent application](https://help.logicgate.com/hc/en-us/articles/4402683190164-Control-Build-Access-for-Applications)
 //
 // Delete a workflow map specified by the ID in the URL path.
-func (s *workflowMap) Delete(ctx context.Context, request operations.DeleteWorkflowMapRequest) (*operations.DeleteWorkflowMapResponse, error) {
+func (s *WorkflowMap) Delete(ctx context.Context, request operations.DeleteWorkflowMapRequest) (*operations.DeleteWorkflowMapResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/v2/workflow-maps/{id}", request, nil)
 	if err != nil {
@@ -169,7 +169,7 @@ func (s *workflowMap) Delete(ctx context.Context, request operations.DeleteWorkf
 // **Permissions:** [Build Access to a parent application](https://help.logicgate.com/hc/en-us/articles/4402683190164-Control-Build-Access-for-Applications)
 //
 // Retrieve a workflow map specified by the ID in the URL path.
-func (s *workflowMap) Read(ctx context.Context, request operations.ReadWorkflowMapRequest) (*operations.ReadWorkflowMapResponse, error) {
+func (s *WorkflowMap) Read(ctx context.Context, request operations.ReadWorkflowMapRequest) (*operations.ReadWorkflowMapResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/v2/workflow-maps/{id}", request, nil)
 	if err != nil {
@@ -235,7 +235,7 @@ func (s *workflowMap) Read(ctx context.Context, request operations.ReadWorkflowM
 // **Permissions:** [Build Access](https://help.logicgate.com/hc/en-us/articles/4402683190164-Control-Build-Access-for-Applications)
 //
 // Retrieve a page of all workflow maps that the current user has [Build Access to a parent application](https://help.logicgate.com/hc/en-us/articles/4402683190164-Control-Build-Access-for-Applications) to.
-func (s *workflowMap) ReadAll(ctx context.Context, request operations.ReadAllWorkflowMapsRequest) (*operations.ReadAllWorkflowMapsResponse, error) {
+func (s *WorkflowMap) ReadAll(ctx context.Context, request operations.ReadAllWorkflowMapsRequest) (*operations.ReadAllWorkflowMapsResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v2/workflow-maps"
 
@@ -302,7 +302,7 @@ func (s *workflowMap) ReadAll(ctx context.Context, request operations.ReadAllWor
 // **Permissions:** [Build Access to a parent application](https://help.logicgate.com/hc/en-us/articles/4402683190164-Control-Build-Access-for-Applications)
 //
 // Update a workflow map specified by the ID in the URL path from a JSON request body. Only present properties with non-empty values are updated.
-func (s *workflowMap) Update(ctx context.Context, request operations.UpdateWorkflowMapRequest) (*operations.UpdateWorkflowMapResponse, error) {
+func (s *WorkflowMap) Update(ctx context.Context, request operations.UpdateWorkflowMapRequest) (*operations.UpdateWorkflowMapResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/api/v2/workflow-maps/{id}", request, nil)
 	if err != nil {

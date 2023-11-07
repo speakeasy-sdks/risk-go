@@ -1,5 +1,5 @@
 # WorkflowMap
-(*WorkflowMap*)
+(*.WorkflowMap*)
 
 ## Overview
 
@@ -46,7 +46,7 @@ func main() {
     res, err := s.WorkflowMap.Create(ctx, operations.CreateWorkflowMapRequest{
         WorkflowMapAPICreateIn: shared.WorkflowMapAPICreateIn{
             From: "a1b2c3d4",
-            Relationship: shared.WorkflowMapAPICreateInRelationshipOneToMany,
+            Relationship: shared.RelationshipOneToMany,
             To: "a1b2c3d4",
         },
     })

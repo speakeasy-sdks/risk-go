@@ -10,31 +10,31 @@ import (
 	"net/http"
 )
 
-// ReadAllFieldsFieldTypeFieldTypeFilter - A field type where, if provided, the response will only contain fields of the identified field type
-type ReadAllFieldsFieldTypeFieldTypeFilter string
+// FieldTypeFilter - A field type where, if provided, the response will only contain fields of the identified field type
+type FieldTypeFilter string
 
 const (
-	ReadAllFieldsFieldTypeFieldTypeFilterDate            ReadAllFieldsFieldTypeFieldTypeFilter = "DATE"
-	ReadAllFieldsFieldTypeFieldTypeFilterUser            ReadAllFieldsFieldTypeFieldTypeFilter = "USER"
-	ReadAllFieldsFieldTypeFieldTypeFilterExternalUser    ReadAllFieldsFieldTypeFieldTypeFilter = "EXTERNAL_USER"
-	ReadAllFieldsFieldTypeFieldTypeFilterText            ReadAllFieldsFieldTypeFieldTypeFilter = "TEXT"
-	ReadAllFieldsFieldTypeFieldTypeFilterTextArea        ReadAllFieldsFieldTypeFieldTypeFilter = "TEXT_AREA"
-	ReadAllFieldsFieldTypeFieldTypeFilterNumber          ReadAllFieldsFieldTypeFieldTypeFilter = "NUMBER"
-	ReadAllFieldsFieldTypeFieldTypeFilterESignature      ReadAllFieldsFieldTypeFieldTypeFilter = "E_SIGNATURE"
-	ReadAllFieldsFieldTypeFieldTypeFilterCheckbox        ReadAllFieldsFieldTypeFieldTypeFilter = "CHECKBOX"
-	ReadAllFieldsFieldTypeFieldTypeFilterMultiSelect     ReadAllFieldsFieldTypeFieldTypeFilter = "MULTI_SELECT"
-	ReadAllFieldsFieldTypeFieldTypeFilterRadio           ReadAllFieldsFieldTypeFieldTypeFilter = "RADIO"
-	ReadAllFieldsFieldTypeFieldTypeFilterSelect          ReadAllFieldsFieldTypeFieldTypeFilter = "SELECT"
-	ReadAllFieldsFieldTypeFieldTypeFilterAttachment      ReadAllFieldsFieldTypeFieldTypeFilter = "ATTACHMENT"
-	ReadAllFieldsFieldTypeFieldTypeFilterCalculation     ReadAllFieldsFieldTypeFieldTypeFilter = "CALCULATION"
-	ReadAllFieldsFieldTypeFieldTypeFilterDateCalculation ReadAllFieldsFieldTypeFieldTypeFilter = "DATE_CALCULATION"
+	FieldTypeFilterDate            FieldTypeFilter = "DATE"
+	FieldTypeFilterUser            FieldTypeFilter = "USER"
+	FieldTypeFilterExternalUser    FieldTypeFilter = "EXTERNAL_USER"
+	FieldTypeFilterText            FieldTypeFilter = "TEXT"
+	FieldTypeFilterTextArea        FieldTypeFilter = "TEXT_AREA"
+	FieldTypeFilterNumber          FieldTypeFilter = "NUMBER"
+	FieldTypeFilterESignature      FieldTypeFilter = "E_SIGNATURE"
+	FieldTypeFilterCheckbox        FieldTypeFilter = "CHECKBOX"
+	FieldTypeFilterMultiSelect     FieldTypeFilter = "MULTI_SELECT"
+	FieldTypeFilterRadio           FieldTypeFilter = "RADIO"
+	FieldTypeFilterSelect          FieldTypeFilter = "SELECT"
+	FieldTypeFilterAttachment      FieldTypeFilter = "ATTACHMENT"
+	FieldTypeFilterCalculation     FieldTypeFilter = "CALCULATION"
+	FieldTypeFilterDateCalculation FieldTypeFilter = "DATE_CALCULATION"
 )
 
-func (e ReadAllFieldsFieldTypeFieldTypeFilter) ToPointer() *ReadAllFieldsFieldTypeFieldTypeFilter {
+func (e FieldTypeFilter) ToPointer() *FieldTypeFilter {
 	return &e
 }
 
-func (e *ReadAllFieldsFieldTypeFieldTypeFilter) UnmarshalJSON(data []byte) error {
+func (e *FieldTypeFilter) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -67,10 +67,10 @@ func (e *ReadAllFieldsFieldTypeFieldTypeFilter) UnmarshalJSON(data []byte) error
 	case "CALCULATION":
 		fallthrough
 	case "DATE_CALCULATION":
-		*e = ReadAllFieldsFieldTypeFieldTypeFilter(v)
+		*e = FieldTypeFilter(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ReadAllFieldsFieldTypeFieldTypeFilter: %v", v)
+		return fmt.Errorf("invalid value for FieldTypeFilter: %v", v)
 	}
 }
 
@@ -78,7 +78,7 @@ type ReadAllFieldsRequest struct {
 	// The unique ID of an application where, if provided, the response will only contain fields from the identified application
 	ApplicationID *string `default:"" queryParam:"style=form,explode=true,name=application-id"`
 	// A field type where, if provided, the response will only contain fields of the identified field type
-	FieldType *ReadAllFieldsFieldTypeFieldTypeFilter `queryParam:"style=form,explode=true,name=field-type"`
+	FieldType *FieldTypeFilter `queryParam:"style=form,explode=true,name=field-type"`
 	// The zero-indexed page number (must not be less than 0, defaults to 0)
 	Page *int `queryParam:"style=form,explode=true,name=page"`
 	// The size of the page and maximum number of items to be returned (must not be less than 1, defaults to 20)
@@ -107,7 +107,7 @@ func (o *ReadAllFieldsRequest) GetApplicationID() *string {
 	return o.ApplicationID
 }
 
-func (o *ReadAllFieldsRequest) GetFieldType() *ReadAllFieldsFieldTypeFieldTypeFilter {
+func (o *ReadAllFieldsRequest) GetFieldType() *FieldTypeFilter {
 	if o == nil {
 		return nil
 	}

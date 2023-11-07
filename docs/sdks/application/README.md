@@ -1,5 +1,5 @@
 # Application
-(*Application*)
+(*.Application*)
 
 ## Overview
 
@@ -46,9 +46,9 @@ func main() {
     res, err := s.Application.Create(ctx, operations.CreateApplicationRequest{
         ApplicationAPICreateIn: shared.ApplicationAPICreateIn{
             Color: riskgo.String("#00a3de"),
-            Icon: shared.ApplicationAPICreateInIconCubes.ToPointer(),
+            Icon: shared.IconCubes.ToPointer(),
             Name: "Cyber Risk Management Application",
-            Type: shared.ApplicationAPICreateInTypeControlsCompliance.ToPointer(),
+            Type: shared.TypeControlsCompliance.ToPointer(),
         },
     })
     if err != nil {
