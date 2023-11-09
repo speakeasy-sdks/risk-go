@@ -60,11 +60,11 @@ func main() {
 ## Available Resources and Operations
 
 
-### [.Authentication](docs/sdks/authentication/README.md)
+### [Authentication](docs/sdks/authentication/README.md)
 
 * [GetAPIToken](docs/sdks/authentication/README.md#getapitoken) - Create an API Access Token
 
-### [.Application](docs/sdks/application/README.md)
+### [Application](docs/sdks/application/README.md)
 
 * [Create](docs/sdks/application/README.md#create) - Create an application
 * [Delete](docs/sdks/application/README.md#delete) - Delete an application
@@ -72,15 +72,15 @@ func main() {
 * [ReadAll](docs/sdks/application/README.md#readall) - Retrieve applications
 * [Update](docs/sdks/application/README.md#update) - Update an application
 
-### [.Field](docs/sdks/field/README.md)
+### [Field](docs/sdks/field/README.md)
 
 * [ReadAll](docs/sdks/field/README.md#readall) - Retrieve fields
 
-### [.Record](docs/sdks/record/README.md)
+### [Record](docs/sdks/record/README.md)
 
 * [ReadAll](docs/sdks/record/README.md#readall) - Retrieve records
 
-### [.Step](docs/sdks/step/README.md)
+### [Step](docs/sdks/step/README.md)
 
 * [Create](docs/sdks/step/README.md#create) - Create a step
 * [Delete](docs/sdks/step/README.md#delete) - Delete a step
@@ -88,7 +88,7 @@ func main() {
 * [ReadAll](docs/sdks/step/README.md#readall) - Retrieve steps
 * [Update](docs/sdks/step/README.md#update) - Update a step
 
-### [.WorkflowMap](docs/sdks/workflowmap/README.md)
+### [WorkflowMap](docs/sdks/workflowmap/README.md)
 
 * [Create](docs/sdks/workflowmap/README.md#create) - Create a workflow map
 * [Delete](docs/sdks/workflowmap/README.md#delete) - Delete a workflow map
@@ -96,7 +96,7 @@ func main() {
 * [ReadAll](docs/sdks/workflowmap/README.md#readall) - Retrieve workflow maps
 * [Update](docs/sdks/workflowmap/README.md#update) - Update a workflow map
 
-### [.Workflow](docs/sdks/workflow/README.md)
+### [Workflow](docs/sdks/workflow/README.md)
 
 * [Create](docs/sdks/workflow/README.md#create) - Create a workflow
 * [Delete](docs/sdks/workflow/README.md#delete) - Delete a workflow
@@ -112,7 +112,46 @@ func main() {
 <!-- Start Error Handling -->
 # Error Handling
 
-Handling errors in your SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
+Handling errors in this SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
+
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
+
+
+## Example
+
+```go
+package main
+
+import (
+	"context"
+	riskgo "github.com/speakeasy-sdks/risk-go"
+	"github.com/speakeasy-sdks/risk-go/pkg/models/operations"
+	"log"
+)
+
+func main() {
+	s := riskgo.New()
+
+	operationSecurity := operations.GetAPITokenSecurity{
+		Password: "",
+		Username: "",
+	}
+
+	ctx := context.Background()
+	res, err := s.Authentication.GetAPIToken(ctx, operations.GetAPITokenRequest{}, operationSecurity)
+	if err != nil {
+
+		var e *sdkerrors.SDKError
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+	}
+}
+
+```
 <!-- End Error Handling -->
 
 <!-- Start Server Selection -->
@@ -236,12 +275,11 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 
 
 <!-- Start Authentication -->
-
 # Authentication
 
 ## Per-Client Security Schemes
 
-Your SDK supports the following security schemes globally:
+This SDK supports the following security schemes globally:
 
 | Name        | Type        | Scheme      |
 | ----------- | ----------- | ----------- |
@@ -283,7 +321,7 @@ func main() {
 
 ## Per-Operation Security Schemes
 
-Some operations in your SDK require the security scheme to be specified at the request level. For example:
+Some operations in this SDK require the security scheme to be specified at the request level. For example:
 
 ```go
 package main

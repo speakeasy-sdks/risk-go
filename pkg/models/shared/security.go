@@ -2,25 +2,6 @@
 
 package shared
 
-type SchemeBasic struct {
-	Password string `security:"name=password"`
-	Username string `security:"name=username"`
-}
-
-func (o *SchemeBasic) GetPassword() string {
-	if o == nil {
-		return ""
-	}
-	return o.Password
-}
-
-func (o *SchemeBasic) GetUsername() string {
-	if o == nil {
-		return ""
-	}
-	return o.Username
-}
-
 type Security struct {
 	Basic  *SchemeBasic `security:"scheme,type=http,subtype=basic"`
 	Bearer *string      `security:"scheme,type=http,subtype=bearer,name=Authorization"`
