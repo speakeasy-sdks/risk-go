@@ -25,11 +25,11 @@ Create a workflow map from a JSON request body.
 package main
 
 import(
-	"context"
-	"log"
-	riskgo "github.com/speakeasy-sdks/risk-go"
 	"github.com/speakeasy-sdks/risk-go/pkg/models/shared"
+	riskgo "github.com/speakeasy-sdks/risk-go"
+	"context"
 	"github.com/speakeasy-sdks/risk-go/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -87,11 +87,11 @@ Delete a workflow map specified by the ID in the URL path.
 package main
 
 import(
-	"context"
-	"log"
-	riskgo "github.com/speakeasy-sdks/risk-go"
 	"github.com/speakeasy-sdks/risk-go/pkg/models/shared"
+	riskgo "github.com/speakeasy-sdks/risk-go"
+	"context"
 	"github.com/speakeasy-sdks/risk-go/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -145,11 +145,11 @@ Retrieve a workflow map specified by the ID in the URL path.
 package main
 
 import(
-	"context"
-	"log"
-	riskgo "github.com/speakeasy-sdks/risk-go"
 	"github.com/speakeasy-sdks/risk-go/pkg/models/shared"
+	riskgo "github.com/speakeasy-sdks/risk-go"
+	"context"
 	"github.com/speakeasy-sdks/risk-go/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -203,11 +203,11 @@ Retrieve a page of all workflow maps that the current user has [Build Access to 
 package main
 
 import(
-	"context"
-	"log"
-	riskgo "github.com/speakeasy-sdks/risk-go"
 	"github.com/speakeasy-sdks/risk-go/pkg/models/shared"
+	riskgo "github.com/speakeasy-sdks/risk-go"
+	"context"
 	"github.com/speakeasy-sdks/risk-go/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -259,11 +259,11 @@ Update a workflow map specified by the ID in the URL path from a JSON request bo
 package main
 
 import(
-	"context"
-	"log"
-	riskgo "github.com/speakeasy-sdks/risk-go"
 	"github.com/speakeasy-sdks/risk-go/pkg/models/shared"
+	riskgo "github.com/speakeasy-sdks/risk-go"
+	"context"
 	"github.com/speakeasy-sdks/risk-go/pkg/models/operations"
+	"log"
 )
 
 func main() {

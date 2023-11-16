@@ -21,11 +21,11 @@ Retrieve a page of all fields whose parent application the current user has [Bui
 package main
 
 import(
-	"context"
-	"log"
-	riskgo "github.com/speakeasy-sdks/risk-go"
 	"github.com/speakeasy-sdks/risk-go/pkg/models/shared"
+	riskgo "github.com/speakeasy-sdks/risk-go"
+	"context"
 	"github.com/speakeasy-sdks/risk-go/pkg/models/operations"
+	"log"
 )
 
 func main() {

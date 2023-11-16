@@ -21,10 +21,10 @@ Generates a new, expiring access token from the provided Client and Secret keys.
 package main
 
 import(
-	"context"
-	"log"
 	riskgo "github.com/speakeasy-sdks/risk-go"
 	"github.com/speakeasy-sdks/risk-go/pkg/models/operations"
+	"context"
+	"log"
 )
 
 func main() {

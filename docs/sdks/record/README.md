@@ -21,11 +21,11 @@ Retrieve a page of all records that the current user has [Read or Write access](
 package main
 
 import(
-	"context"
-	"log"
-	riskgo "github.com/speakeasy-sdks/risk-go"
 	"github.com/speakeasy-sdks/risk-go/pkg/models/shared"
+	riskgo "github.com/speakeasy-sdks/risk-go"
+	"context"
 	"github.com/speakeasy-sdks/risk-go/pkg/models/operations"
+	"log"
 )
 
 func main() {
