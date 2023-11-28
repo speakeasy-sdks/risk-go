@@ -81,7 +81,6 @@ pkg/utils/utils.go
 /pkg/models/shared/workflowapiupdatein.go
 /pkg/models/shared/security.go
 /pkg/models/shared/schemebasic.go
-USAGE.md
 docs/pkg/models/operations/getapitokensecurity.md
 docs/pkg/models/operations/getapitokenrequest.md
 docs/pkg/models/operations/getapitokenresponse.md
@@ -193,4 +192,5 @@ docs/sdks/record/README.md
 docs/sdks/step/README.md
 docs/sdks/workflowmap/README.md
 docs/sdks/workflow/README.md
+USAGE.md
 .gitattributes

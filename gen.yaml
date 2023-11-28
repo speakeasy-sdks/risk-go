@@ -2,8 +2,8 @@ configVersion: 1.0.0
 management:
   docChecksum: 5fa7e0c88f526d37d5ff49917d1c5693
   docVersion: v2023.10.0
-  speakeasyVersion: 1.120.3
-  generationVersion: 2.192.1
+  speakeasyVersion: 1.123.0
+  generationVersion: 2.202.2
 generation:
   comments: {}
   sdkClassName: Risk-Cloud-API
@@ -15,11 +15,11 @@ features:
     constsAndDefaults: 0.1.1
     core: 3.1.5
     globalSecurity: 2.82.2
-    globalServerURLs: 2.82.0
+    globalServerURLs: 2.82.1
     methodSecurity: 2.82.1
     nameOverrides: 2.81.1
 go:
-  version: 0.2.2
+  version: 0.2.3
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true
   imports:
