@@ -268,6 +268,8 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 
 <!-- Start Special Types [types] -->
 ## Special Types
+
+
 <!-- End Special Types [types] -->
 
 
@@ -292,24 +294,34 @@ import (
 	"context"
 	riskgo "github.com/speakeasy-sdks/risk-go"
 	"github.com/speakeasy-sdks/risk-go/pkg/models/operations"
+	"github.com/speakeasy-sdks/risk-go/pkg/models/shared"
 	"log"
 )
 
 func main() {
-	s := riskgo.New()
-
-	operationSecurity := operations.GetAPITokenSecurity{
-		Password: "",
-		Username: "",
-	}
+	s := riskgo.New(
+		riskgo.WithSecurity(shared.Security{
+			Basic: &shared.SchemeBasic{
+				Password: "",
+				Username: "",
+			},
+		}),
+	)
 
 	ctx := context.Background()
-	res, err := s.Authentication.GetAPIToken(ctx, operations.GetAPITokenRequest{}, operationSecurity)
+	res, err := s.Application.Create(ctx, operations.CreateApplicationRequest{
+		ApplicationAPICreateIn: shared.ApplicationAPICreateIn{
+			Color: riskgo.String("#00a3de"),
+			Icon:  shared.IconCubes.ToPointer(),
+			Name:  "Cyber Risk Management Application",
+			Type:  shared.TypeControlsCompliance.ToPointer(),
+		},
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	if res.LegacyAPITokenOut != nil {
+	if res.ApplicationAPIOut != nil {
 		// handle response
 	}
 }
