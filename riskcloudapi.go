@@ -133,7 +133,6 @@ func withSecurity(security interface{}) func(context.Context) (interface{}, erro
 }
 
 // WithSecurity configures the SDK to use the provided security details
-
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *RiskCloudAPI) {
 		sdk.sdkConfiguration.Security = withSecurity(security)
@@ -161,9 +160,9 @@ func New(opts ...SDKOption) *RiskCloudAPI {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "v2023.10.0",
-			SDKVersion:        "0.2.4",
-			GenVersion:        "2.210.3",
-			UserAgent:         "speakeasy-sdk/go 0.2.4 2.210.3 v2023.10.0 github.com/speakeasy-sdks/risk-go",
+			SDKVersion:        "0.3.0",
+			GenVersion:        "2.213.3",
+			UserAgent:         "speakeasy-sdk/go 0.3.0 2.213.3 v2023.10.0 github.com/speakeasy-sdks/risk-go",
 		},
 	}
 	for _, opt := range opts {

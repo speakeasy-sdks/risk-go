@@ -36,8 +36,8 @@ func main() {
     s := riskgo.New(
         riskgo.WithSecurity(shared.Security{
             Basic: &shared.SchemeBasic{
-                Password: "",
-                Username: "",
+                Password: "<YOUR_PASSWORD_HERE>",
+                Username: "<YOUR_USERNAME_HERE>",
             },
         }),
     )
@@ -99,8 +99,8 @@ func main() {
     s := riskgo.New(
         riskgo.WithSecurity(shared.Security{
             Basic: &shared.SchemeBasic{
-                Password: "",
-                Username: "",
+                Password: "<YOUR_PASSWORD_HERE>",
+                Username: "<YOUR_USERNAME_HERE>",
             },
         }),
     )
@@ -157,8 +157,8 @@ func main() {
     s := riskgo.New(
         riskgo.WithSecurity(shared.Security{
             Basic: &shared.SchemeBasic{
-                Password: "",
-                Username: "",
+                Password: "<YOUR_PASSWORD_HERE>",
+                Username: "<YOUR_USERNAME_HERE>",
             },
         }),
     )
@@ -215,8 +215,8 @@ func main() {
     s := riskgo.New(
         riskgo.WithSecurity(shared.Security{
             Basic: &shared.SchemeBasic{
-                Password: "",
-                Username: "",
+                Password: "<YOUR_PASSWORD_HERE>",
+                Username: "<YOUR_USERNAME_HERE>",
             },
         }),
     )
@@ -271,8 +271,8 @@ func main() {
     s := riskgo.New(
         riskgo.WithSecurity(shared.Security{
             Basic: &shared.SchemeBasic{
-                Password: "",
-                Username: "",
+                Password: "<YOUR_PASSWORD_HERE>",
+                Username: "<YOUR_USERNAME_HERE>",
             },
         }),
     )

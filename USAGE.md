@@ -13,8 +13,8 @@ func main() {
 	s := riskgo.New()
 
 	operationSecurity := operations.GetAPITokenSecurity{
-		Password: "",
-		Username: "",
+		Password: "<YOUR_PASSWORD_HERE>",
+		Username: "<YOUR_USERNAME_HERE>",
 	}
 
 	ctx := context.Background()
