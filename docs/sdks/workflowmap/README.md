@@ -73,7 +73,7 @@ func main() {
 **[*operations.CreateWorkflowMapResponse](../../pkg/models/operations/createworkflowmapresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Delete
 
@@ -131,7 +131,7 @@ func main() {
 **[*operations.DeleteWorkflowMapResponse](../../pkg/models/operations/deleteworkflowmapresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Read
 
@@ -189,7 +189,7 @@ func main() {
 **[*operations.ReadWorkflowMapResponse](../../pkg/models/operations/readworkflowmapresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ReadAll
 
@@ -245,7 +245,7 @@ func main() {
 **[*operations.ReadAllWorkflowMapsResponse](../../pkg/models/operations/readallworkflowmapsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Update
 
@@ -306,4 +306,4 @@ func main() {
 **[*operations.UpdateWorkflowMapResponse](../../pkg/models/operations/updateworkflowmapresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

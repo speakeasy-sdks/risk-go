@@ -77,7 +77,7 @@ func main() {
 **[*operations.CreateStepResponse](../../pkg/models/operations/createstepresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Delete
 
@@ -135,7 +135,7 @@ func main() {
 **[*operations.DeleteStepResponse](../../pkg/models/operations/deletestepresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Read
 
@@ -193,7 +193,7 @@ func main() {
 **[*operations.ReadStepResponse](../../pkg/models/operations/readstepresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ReadAll
 
@@ -249,7 +249,7 @@ func main() {
 **[*operations.ReadAllStepsResponse](../../pkg/models/operations/readallstepsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Update
 
@@ -316,4 +316,4 @@ func main() {
 **[*operations.UpdateResponse](../../pkg/models/operations/updateresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
