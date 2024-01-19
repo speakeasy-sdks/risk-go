@@ -160,9 +160,9 @@ func New(opts ...SDKOption) *RiskCloudAPI {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "v2023.10.0",
-			SDKVersion:        "0.3.2",
-			GenVersion:        "2.234.3",
-			UserAgent:         "speakeasy-sdk/go 0.3.2 2.234.3 v2023.10.0 github.com/speakeasy-sdks/risk-go",
+			SDKVersion:        "0.3.3",
+			GenVersion:        "2.237.2",
+			UserAgent:         "speakeasy-sdk/go 0.3.3 2.237.2 v2023.10.0 github.com/speakeasy-sdks/risk-go",
 		},
 	}
 	for _, opt := range opts {

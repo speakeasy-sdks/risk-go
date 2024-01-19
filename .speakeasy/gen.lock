@@ -4,9 +4,9 @@ management:
   docChecksum: 5fa7e0c88f526d37d5ff49917d1c5693
   docVersion: v2023.10.0
   speakeasyVersion: internal
-  generationVersion: 2.234.3
-  releaseVersion: 0.3.2
-  configChecksum: 0558097a92431b96797f7da9e2632b93
+  generationVersion: 2.237.2
+  releaseVersion: 0.3.3
+  configChecksum: 1b41be814887dd101c050c5f842420fa
   repoURL: https://github.com/speakeasy-sdks/risk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/risk-go
@@ -15,9 +15,9 @@ features:
   go:
     constsAndDefaults: 0.1.2
     core: 3.3.1
-    globalSecurity: 2.82.3
+    globalSecurity: 2.82.4
     globalServerURLs: 2.82.1
-    methodSecurity: 2.82.1
+    methodSecurity: 2.82.2
     nameOverrides: 2.81.1
 generatedFiles:
   - authentication.go
@@ -30,7 +30,6 @@ generatedFiles:
   - riskcloudapi.go
   - go.mod
   - go.sum
-  - tests/helpers.go
   - pkg/models/sdkerrors/sdkerror.go
   - pkg/types/bigint.go
   - pkg/types/date.go
