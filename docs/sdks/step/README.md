@@ -110,7 +110,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Step.Delete(ctx, operations.DeleteStepRequest{
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
@@ -168,7 +168,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Step.Read(ctx, operations.ReadStepRequest{
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
@@ -291,7 +291,7 @@ func main() {
             Xpos: riskgo.Int(20),
             Ypos: riskgo.Int(20),
         },
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)

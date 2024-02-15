@@ -106,7 +106,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.WorkflowMap.Delete(ctx, operations.DeleteWorkflowMapRequest{
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
@@ -164,7 +164,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.WorkflowMap.Read(ctx, operations.ReadWorkflowMapRequest{
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
@@ -281,7 +281,7 @@ func main() {
         WorkflowMapAPIUpdateIn: shared.WorkflowMapAPIUpdateIn{
             Relationship: shared.WorkflowMapAPIUpdateInRelationshipManyToMany,
         },
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)

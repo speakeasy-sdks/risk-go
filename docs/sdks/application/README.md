@@ -107,7 +107,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Application.Delete(ctx, operations.DeleteApplicationRequest{
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
@@ -165,7 +165,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Application.Read(ctx, operations.ReadApplicationRequest{
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
@@ -287,7 +287,7 @@ func main() {
             RestrictBuildAccess: riskgo.Bool(false),
             Type: shared.ApplicationAPIUpdateInTypeControlsCompliance.ToPointer(),
         },
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)

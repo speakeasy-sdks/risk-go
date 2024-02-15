@@ -108,7 +108,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Workflow.Delete(ctx, operations.DeleteWorkflowRequest{
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
@@ -166,7 +166,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Workflow.Read(ctx, operations.ReadWorkflowRequest{
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
@@ -286,7 +286,7 @@ func main() {
             Xpos: riskgo.Int(20),
             Ypos: riskgo.Int(20),
         },
-        ID: "<ID>",
+        ID: "<id>",
     })
     if err != nil {
         log.Fatal(err)
