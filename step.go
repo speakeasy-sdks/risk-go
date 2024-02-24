@@ -32,7 +32,11 @@ func newStep(sdkConfig sdkConfiguration) *Step {
 //
 // Create a step from a JSON request body.
 func (s *Step) Create(ctx context.Context, request operations.CreateStepRequest) (*operations.CreateStepResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "createStep"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "createStep",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := url.JoinPath(baseURL, "/api/v2/steps")
@@ -55,12 +59,12 @@ func (s *Step) Create(ctx context.Context, request operations.CreateStepRequest)
 
 	utils.PopulateHeaders(ctx, req, request)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -70,15 +74,15 @@ func (s *Step) Create(ctx context.Context, request operations.CreateStepRequest)
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -125,7 +129,11 @@ func (s *Step) Create(ctx context.Context, request operations.CreateStepRequest)
 //
 // Delete a step specified by the ID in the URL path.
 func (s *Step) Delete(ctx context.Context, request operations.DeleteStepRequest) (*operations.DeleteStepResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "deleteStep"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "deleteStep",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/v2/steps/{id}", request, nil)
@@ -142,12 +150,12 @@ func (s *Step) Delete(ctx context.Context, request operations.DeleteStepRequest)
 
 	utils.PopulateHeaders(ctx, req, request)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -157,15 +165,15 @@ func (s *Step) Delete(ctx context.Context, request operations.DeleteStepRequest)
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -212,7 +220,11 @@ func (s *Step) Delete(ctx context.Context, request operations.DeleteStepRequest)
 //
 // Retrieve a step specified by the ID in the URL path.
 func (s *Step) Read(ctx context.Context, request operations.ReadStepRequest) (*operations.ReadStepResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "readStep"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "readStep",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/v2/steps/{id}", request, nil)
@@ -229,12 +241,12 @@ func (s *Step) Read(ctx context.Context, request operations.ReadStepRequest) (*o
 
 	utils.PopulateHeaders(ctx, req, request)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -244,15 +256,15 @@ func (s *Step) Read(ctx context.Context, request operations.ReadStepRequest) (*o
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -299,7 +311,11 @@ func (s *Step) Read(ctx context.Context, request operations.ReadStepRequest) (*o
 //
 // Retrieve a page of all steps that the current user has [Build Access to parent application](https://help.logicgate.com/hc/en-us/articles/4402683190164-Control-Build-Access-for-Applications) to.
 func (s *Step) ReadAll(ctx context.Context, request operations.ReadAllStepsRequest) (*operations.ReadAllStepsResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "readAllSteps"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "readAllSteps",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := url.JoinPath(baseURL, "/api/v2/steps")
@@ -320,12 +336,12 @@ func (s *Step) ReadAll(ctx context.Context, request operations.ReadAllStepsReque
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -335,15 +351,15 @@ func (s *Step) ReadAll(ctx context.Context, request operations.ReadAllStepsReque
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -390,7 +406,11 @@ func (s *Step) ReadAll(ctx context.Context, request operations.ReadAllStepsReque
 //
 // Update a step specified by the ID in the URL path from a JSON request body. Only present properties with non-empty values are updated.
 func (s *Step) Update(ctx context.Context, request operations.UpdateRequest) (*operations.UpdateResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "update"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "update",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/v2/steps/{id}", request, nil)
@@ -413,12 +433,12 @@ func (s *Step) Update(ctx context.Context, request operations.UpdateRequest) (*o
 
 	utils.PopulateHeaders(ctx, req, request)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -428,15 +448,15 @@ func (s *Step) Update(ctx context.Context, request operations.UpdateRequest) (*o
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}

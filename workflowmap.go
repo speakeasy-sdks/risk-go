@@ -32,7 +32,11 @@ func newWorkflowMap(sdkConfig sdkConfiguration) *WorkflowMap {
 //
 // Create a workflow map from a JSON request body.
 func (s *WorkflowMap) Create(ctx context.Context, request operations.CreateWorkflowMapRequest) (*operations.CreateWorkflowMapResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "createWorkflowMap"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "createWorkflowMap",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := url.JoinPath(baseURL, "/api/v2/workflow-maps")
@@ -55,12 +59,12 @@ func (s *WorkflowMap) Create(ctx context.Context, request operations.CreateWorkf
 
 	utils.PopulateHeaders(ctx, req, request)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -70,15 +74,15 @@ func (s *WorkflowMap) Create(ctx context.Context, request operations.CreateWorkf
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -125,7 +129,11 @@ func (s *WorkflowMap) Create(ctx context.Context, request operations.CreateWorkf
 //
 // Delete a workflow map specified by the ID in the URL path.
 func (s *WorkflowMap) Delete(ctx context.Context, request operations.DeleteWorkflowMapRequest) (*operations.DeleteWorkflowMapResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "deleteWorkflowMap"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "deleteWorkflowMap",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/v2/workflow-maps/{id}", request, nil)
@@ -142,12 +150,12 @@ func (s *WorkflowMap) Delete(ctx context.Context, request operations.DeleteWorkf
 
 	utils.PopulateHeaders(ctx, req, request)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -157,15 +165,15 @@ func (s *WorkflowMap) Delete(ctx context.Context, request operations.DeleteWorkf
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -212,7 +220,11 @@ func (s *WorkflowMap) Delete(ctx context.Context, request operations.DeleteWorkf
 //
 // Retrieve a workflow map specified by the ID in the URL path.
 func (s *WorkflowMap) Read(ctx context.Context, request operations.ReadWorkflowMapRequest) (*operations.ReadWorkflowMapResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "readWorkflowMap"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "readWorkflowMap",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/v2/workflow-maps/{id}", request, nil)
@@ -229,12 +241,12 @@ func (s *WorkflowMap) Read(ctx context.Context, request operations.ReadWorkflowM
 
 	utils.PopulateHeaders(ctx, req, request)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -244,15 +256,15 @@ func (s *WorkflowMap) Read(ctx context.Context, request operations.ReadWorkflowM
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -299,7 +311,11 @@ func (s *WorkflowMap) Read(ctx context.Context, request operations.ReadWorkflowM
 //
 // Retrieve a page of all workflow maps that the current user has [Build Access to a parent application](https://help.logicgate.com/hc/en-us/articles/4402683190164-Control-Build-Access-for-Applications) to.
 func (s *WorkflowMap) ReadAll(ctx context.Context, request operations.ReadAllWorkflowMapsRequest) (*operations.ReadAllWorkflowMapsResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "readAllWorkflowMaps"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "readAllWorkflowMaps",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := url.JoinPath(baseURL, "/api/v2/workflow-maps")
@@ -320,12 +336,12 @@ func (s *WorkflowMap) ReadAll(ctx context.Context, request operations.ReadAllWor
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -335,15 +351,15 @@ func (s *WorkflowMap) ReadAll(ctx context.Context, request operations.ReadAllWor
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -390,7 +406,11 @@ func (s *WorkflowMap) ReadAll(ctx context.Context, request operations.ReadAllWor
 //
 // Update a workflow map specified by the ID in the URL path from a JSON request body. Only present properties with non-empty values are updated.
 func (s *WorkflowMap) Update(ctx context.Context, request operations.UpdateWorkflowMapRequest) (*operations.UpdateWorkflowMapResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "updateWorkflowMap"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "updateWorkflowMap",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/v2/workflow-maps/{id}", request, nil)
@@ -413,12 +433,12 @@ func (s *WorkflowMap) Update(ctx context.Context, request operations.UpdateWorkf
 
 	utils.PopulateHeaders(ctx, req, request)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -428,15 +448,15 @@ func (s *WorkflowMap) Update(ctx context.Context, request operations.UpdateWorkf
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}

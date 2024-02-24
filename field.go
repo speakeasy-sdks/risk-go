@@ -32,7 +32,11 @@ func newField(sdkConfig sdkConfiguration) *Field {
 //
 // Retrieve a page of all fields whose parent application the current user has [Build Access](https://help.logicgate.com/hc/en-us/articles/4402683190164-Control-Build-Access-for-Applications) to.
 func (s *Field) ReadAll(ctx context.Context, request operations.ReadAllFieldsRequest) (*operations.ReadAllFieldsResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "readAllFields"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "readAllFields",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := url.JoinPath(baseURL, "/api/v2/fields")
@@ -53,12 +57,12 @@ func (s *Field) ReadAll(ctx context.Context, request operations.ReadAllFieldsReq
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -68,15 +72,15 @@ func (s *Field) ReadAll(ctx context.Context, request operations.ReadAllFieldsReq
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}

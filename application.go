@@ -32,7 +32,11 @@ func newApplication(sdkConfig sdkConfiguration) *Application {
 //
 // Create an application from a JSON request body.
 func (s *Application) Create(ctx context.Context, request operations.CreateApplicationRequest) (*operations.CreateApplicationResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "createApplication"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "createApplication",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := url.JoinPath(baseURL, "/api/v2/applications")
@@ -55,12 +59,12 @@ func (s *Application) Create(ctx context.Context, request operations.CreateAppli
 
 	utils.PopulateHeaders(ctx, req, request)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -70,15 +74,15 @@ func (s *Application) Create(ctx context.Context, request operations.CreateAppli
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -125,7 +129,11 @@ func (s *Application) Create(ctx context.Context, request operations.CreateAppli
 //
 // Delete an application specified by the ID in the URL path.
 func (s *Application) Delete(ctx context.Context, request operations.DeleteApplicationRequest) (*operations.DeleteApplicationResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "deleteApplication"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "deleteApplication",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/v2/applications/{id}", request, nil)
@@ -142,12 +150,12 @@ func (s *Application) Delete(ctx context.Context, request operations.DeleteAppli
 
 	utils.PopulateHeaders(ctx, req, request)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -157,15 +165,15 @@ func (s *Application) Delete(ctx context.Context, request operations.DeleteAppli
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -212,7 +220,11 @@ func (s *Application) Delete(ctx context.Context, request operations.DeleteAppli
 //
 // Retrieve an application specified by the ID in the URL path.
 func (s *Application) Read(ctx context.Context, request operations.ReadApplicationRequest) (*operations.ReadApplicationResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "readApplication"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "readApplication",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/v2/applications/{id}", request, nil)
@@ -229,12 +241,12 @@ func (s *Application) Read(ctx context.Context, request operations.ReadApplicati
 
 	utils.PopulateHeaders(ctx, req, request)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -244,15 +256,15 @@ func (s *Application) Read(ctx context.Context, request operations.ReadApplicati
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -299,7 +311,11 @@ func (s *Application) Read(ctx context.Context, request operations.ReadApplicati
 //
 // Retrieve a page of all applications that the current user has [Build Access](https://help.logicgate.com/hc/en-us/articles/4402683190164-Control-Build-Access-for-Applications) to.
 func (s *Application) ReadAll(ctx context.Context, request operations.ReadAllApplicationsRequest) (*operations.ReadAllApplicationsResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "readAllApplications"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "readAllApplications",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := url.JoinPath(baseURL, "/api/v2/applications")
@@ -320,12 +336,12 @@ func (s *Application) ReadAll(ctx context.Context, request operations.ReadAllApp
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -335,15 +351,15 @@ func (s *Application) ReadAll(ctx context.Context, request operations.ReadAllApp
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -390,7 +406,11 @@ func (s *Application) ReadAll(ctx context.Context, request operations.ReadAllApp
 //
 // Update an application specified by the ID in the URL path from a JSON request body. Only present properties with non-empty values are updated.
 func (s *Application) Update(ctx context.Context, request operations.Update1Request) (*operations.Update1Response, error) {
-	hookCtx := hooks.HookContext{OperationID: "update_1"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "update_1",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/api/v2/applications/{id}", request, nil)
@@ -413,12 +433,12 @@ func (s *Application) Update(ctx context.Context, request operations.Update1Requ
 
 	utils.PopulateHeaders(ctx, req, request)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -428,15 +448,15 @@ func (s *Application) Update(ctx context.Context, request operations.Update1Requ
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
