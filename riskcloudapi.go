@@ -162,9 +162,9 @@ func New(opts ...SDKOption) *RiskCloudAPI {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "v2023.10.0",
-			SDKVersion:        "0.5.2",
-			GenVersion:        "2.272.4",
-			UserAgent:         "speakeasy-sdk/go 0.5.2 2.272.4 v2023.10.0 github.com/speakeasy-sdks/risk-go",
+			SDKVersion:        "0.5.3",
+			GenVersion:        "2.272.7",
+			UserAgent:         "speakeasy-sdk/go 0.5.3 2.272.7 v2023.10.0 github.com/speakeasy-sdks/risk-go",
 			Hooks:             hooks.New(),
 		},
 	}
