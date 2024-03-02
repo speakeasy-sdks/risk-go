@@ -4,16 +4,16 @@ management:
   docChecksum: 5fa7e0c88f526d37d5ff49917d1c5693
   docVersion: v2023.10.0
   speakeasyVersion: internal
-  generationVersion: 2.272.7
-  releaseVersion: 0.5.3
-  configChecksum: 80e1a180152a4f51f8ba9408f98026ff
+  generationVersion: 2.277.0
+  releaseVersion: 0.5.4
+  configChecksum: cfd67a282ff3719bbea3a0b325fe7225
   repoURL: https://github.com/speakeasy-sdks/risk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/risk-go
   published: true
 features:
   go:
-    constsAndDefaults: 0.1.3
+    constsAndDefaults: 0.1.4
     core: 3.4.3
     globalSecurity: 2.82.8
     globalServerURLs: 2.82.1
