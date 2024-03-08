@@ -179,3 +179,13 @@ Based on:
 - [go v0.5.4] .
 ### Releases
 - [Go v0.5.4] https://github.com/speakeasy-sdks/risk-go/releases/tag/v0.5.4 - .
+
+## 2024-03-08 01:04:26
+### Changes
+Based on:
+- OpenAPI Doc v2023.10.0 
+- Speakeasy CLI 1.204.1 (2.279.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v0.6.0] .
+### Releases
+- [Go v0.6.0] https://github.com/speakeasy-sdks/risk-go/releases/tag/v0.6.0 - .

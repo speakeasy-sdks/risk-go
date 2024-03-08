@@ -54,7 +54,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ApplicationAPIOut != nil {
         // handle response
     }
@@ -112,7 +111,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.AppActionResponse != nil {
         // handle response
     }
@@ -170,7 +168,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ApplicationAPIOut != nil {
         // handle response
     }
@@ -226,7 +223,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.PageModelOutApplicationAPIOut != nil {
         // handle response
     }
@@ -292,7 +288,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ApplicationAPIOut != nil {
         // handle response
     }

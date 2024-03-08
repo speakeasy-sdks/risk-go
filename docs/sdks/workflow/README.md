@@ -55,7 +55,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.WorkflowAPIOut != nil {
         // handle response
     }
@@ -113,7 +112,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.AppActionResponse != nil {
         // handle response
     }
@@ -171,7 +169,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.WorkflowAPIOut != nil {
         // handle response
     }
@@ -227,7 +224,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.PageModelOutWorkflowAPIOut != nil {
         // handle response
     }
@@ -291,7 +287,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.WorkflowAPIOut != nil {
         // handle response
     }
