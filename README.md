@@ -34,19 +34,22 @@ import (
 	"context"
 	riskgo "github.com/speakeasy-sdks/risk-go"
 	"github.com/speakeasy-sdks/risk-go/pkg/models/operations"
+	"github.com/speakeasy-sdks/risk-go/pkg/models/shared"
 	"log"
 )
 
 func main() {
-	s := riskgo.New()
-
-	operationSecurity := operations.GetAPITokenSecurity{
-		Password: "<YOUR_PASSWORD_HERE>",
-		Username: "<YOUR_USERNAME_HERE>",
-	}
+	s := riskgo.New(
+		riskgo.WithSecurity(shared.Security{
+			Basic: &shared.SchemeBasic{
+				Password: "<YOUR_PASSWORD_HERE>",
+				Username: "<YOUR_USERNAME_HERE>",
+			},
+		}),
+	)
 
 	ctx := context.Background()
-	res, err := s.Authentication.GetAPIToken(ctx, operations.GetAPITokenRequest{}, operationSecurity)
+	res, err := s.Authentication.GetAPIToken(ctx, operations.GetAPITokenRequest{})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -126,19 +129,22 @@ import (
 	riskgo "github.com/speakeasy-sdks/risk-go"
 	"github.com/speakeasy-sdks/risk-go/pkg/models/operations"
 	"github.com/speakeasy-sdks/risk-go/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/risk-go/pkg/models/shared"
 	"log"
 )
 
 func main() {
-	s := riskgo.New()
-
-	operationSecurity := operations.GetAPITokenSecurity{
-		Password: "<YOUR_PASSWORD_HERE>",
-		Username: "<YOUR_USERNAME_HERE>",
-	}
+	s := riskgo.New(
+		riskgo.WithSecurity(shared.Security{
+			Basic: &shared.SchemeBasic{
+				Password: "<YOUR_PASSWORD_HERE>",
+				Username: "<YOUR_USERNAME_HERE>",
+			},
+		}),
+	)
 
 	ctx := context.Background()
-	res, err := s.Authentication.GetAPIToken(ctx, operations.GetAPITokenRequest{}, operationSecurity)
+	res, err := s.Authentication.GetAPIToken(ctx, operations.GetAPITokenRequest{})
 	if err != nil {
 
 		var e *sdkerrors.SDKError
@@ -172,21 +178,23 @@ import (
 	"context"
 	riskgo "github.com/speakeasy-sdks/risk-go"
 	"github.com/speakeasy-sdks/risk-go/pkg/models/operations"
+	"github.com/speakeasy-sdks/risk-go/pkg/models/shared"
 	"log"
 )
 
 func main() {
 	s := riskgo.New(
 		riskgo.WithServerIndex(0),
+		riskgo.WithSecurity(shared.Security{
+			Basic: &shared.SchemeBasic{
+				Password: "<YOUR_PASSWORD_HERE>",
+				Username: "<YOUR_USERNAME_HERE>",
+			},
+		}),
 	)
 
-	operationSecurity := operations.GetAPITokenSecurity{
-		Password: "<YOUR_PASSWORD_HERE>",
-		Username: "<YOUR_USERNAME_HERE>",
-	}
-
 	ctx := context.Background()
-	res, err := s.Authentication.GetAPIToken(ctx, operations.GetAPITokenRequest{}, operationSecurity)
+	res, err := s.Authentication.GetAPIToken(ctx, operations.GetAPITokenRequest{})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -208,21 +216,23 @@ import (
 	"context"
 	riskgo "github.com/speakeasy-sdks/risk-go"
 	"github.com/speakeasy-sdks/risk-go/pkg/models/operations"
+	"github.com/speakeasy-sdks/risk-go/pkg/models/shared"
 	"log"
 )
 
 func main() {
 	s := riskgo.New(
 		riskgo.WithServerURL("http://localhost"),
+		riskgo.WithSecurity(shared.Security{
+			Basic: &shared.SchemeBasic{
+				Password: "<YOUR_PASSWORD_HERE>",
+				Username: "<YOUR_USERNAME_HERE>",
+			},
+		}),
 	)
 
-	operationSecurity := operations.GetAPITokenSecurity{
-		Password: "<YOUR_PASSWORD_HERE>",
-		Username: "<YOUR_USERNAME_HERE>",
-	}
-
 	ctx := context.Background()
-	res, err := s.Authentication.GetAPIToken(ctx, operations.GetAPITokenRequest{}, operationSecurity)
+	res, err := s.Authentication.GetAPIToken(ctx, operations.GetAPITokenRequest{})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -306,47 +316,7 @@ func main() {
 	)
 
 	ctx := context.Background()
-	res, err := s.Application.Create(ctx, operations.CreateApplicationRequest{
-		ApplicationAPICreateIn: shared.ApplicationAPICreateIn{
-			Color: riskgo.String("#00a3de"),
-			Icon:  shared.IconCubes.ToPointer(),
-			Name:  "Cyber Risk Management Application",
-			Type:  shared.TypeControlsCompliance.ToPointer(),
-		},
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-	if res.ApplicationAPIOut != nil {
-		// handle response
-	}
-}
-
-```
-
-### Per-Operation Security Schemes
-
-Some operations in this SDK require the security scheme to be specified at the request level. For example:
-```go
-package main
-
-import (
-	"context"
-	riskgo "github.com/speakeasy-sdks/risk-go"
-	"github.com/speakeasy-sdks/risk-go/pkg/models/operations"
-	"log"
-)
-
-func main() {
-	s := riskgo.New()
-
-	operationSecurity := operations.GetAPITokenSecurity{
-		Password: "<YOUR_PASSWORD_HERE>",
-		Username: "<YOUR_USERNAME_HERE>",
-	}
-
-	ctx := context.Background()
-	res, err := s.Authentication.GetAPIToken(ctx, operations.GetAPITokenRequest{}, operationSecurity)
+	res, err := s.Authentication.GetAPIToken(ctx, operations.GetAPITokenRequest{})
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -21,23 +21,25 @@ Generates a new, expiring access token from the provided Client and Secret keys.
 package main
 
 import(
+	"github.com/speakeasy-sdks/risk-go/pkg/models/shared"
 	riskgo "github.com/speakeasy-sdks/risk-go"
-	"github.com/speakeasy-sdks/risk-go/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-sdks/risk-go/pkg/models/operations"
 	"log"
 )
 
 func main() {
-    s := riskgo.New()
-
-
-    operationSecurity := operations.GetAPITokenSecurity{
-            Password: "<YOUR_PASSWORD_HERE>",
-            Username: "<YOUR_USERNAME_HERE>",
-        }
+    s := riskgo.New(
+        riskgo.WithSecurity(shared.Security{
+            Basic: &shared.SchemeBasic{
+                Password: "<YOUR_PASSWORD_HERE>",
+                Username: "<YOUR_USERNAME_HERE>",
+            },
+        }),
+    )
 
     ctx := context.Background()
-    res, err := s.Authentication.GetAPIToken(ctx, operations.GetAPITokenRequest{}, operationSecurity)
+    res, err := s.Authentication.GetAPIToken(ctx, operations.GetAPITokenRequest{})
     if err != nil {
         log.Fatal(err)
     }
@@ -49,11 +51,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
-| `request`                                                                            | [operations.GetAPITokenRequest](../../pkg/models/operations/getapitokenrequest.md)   | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
-| `security`                                                                           | [operations.GetAPITokenSecurity](../../pkg/models/operations/getapitokensecurity.md) | :heavy_check_mark:                                                                   | The security requirements to use for the request.                                    |
+| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `ctx`                                                                              | [context.Context](https://pkg.go.dev/context#Context)                              | :heavy_check_mark:                                                                 | The context to use for the request.                                                |
+| `request`                                                                          | [operations.GetAPITokenRequest](../../pkg/models/operations/getapitokenrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 
 
 ### Response

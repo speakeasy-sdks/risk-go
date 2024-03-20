@@ -7,25 +7,6 @@ import (
 	"net/http"
 )
 
-type GetAPITokenSecurity struct {
-	Password string `security:"scheme,type=http,subtype=basic,name=password"`
-	Username string `security:"scheme,type=http,subtype=basic,name=username"`
-}
-
-func (o *GetAPITokenSecurity) GetPassword() string {
-	if o == nil {
-		return ""
-	}
-	return o.Password
-}
-
-func (o *GetAPITokenSecurity) GetUsername() string {
-	if o == nil {
-		return ""
-	}
-	return o.Username
-}
-
 type GetAPITokenRequest struct {
 }
 

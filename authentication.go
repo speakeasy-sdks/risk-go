@@ -31,11 +31,11 @@ func newAuthentication(sdkConfig sdkConfiguration) *Authentication {
 // **Permissions:** Authenticated User
 //
 // Generates a new, expiring access token from the provided Client and Secret keys.
-func (s *Authentication) GetAPIToken(ctx context.Context, request operations.GetAPITokenRequest, security operations.GetAPITokenSecurity) (*operations.GetAPITokenResponse, error) {
+func (s *Authentication) GetAPIToken(ctx context.Context, request operations.GetAPITokenRequest) (*operations.GetAPITokenResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "getApiToken",
-		SecuritySource: withSecurity(security),
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
@@ -53,7 +53,7 @@ func (s *Authentication) GetAPIToken(ctx context.Context, request operations.Get
 
 	utils.PopulateHeaders(ctx, req, request)
 
-	if err := utils.PopulateSecurity(ctx, req, withSecurity(security)); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
 
